@@ -1,4 +1,9 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github, Calendar, MapPin } from "lucide-react";
 
@@ -22,7 +27,7 @@ interface Experience {
   location: string;
   description: string;
   logo: string;
-  color: string;
+  color?: string;
   skills: string[];
   achievements: string[];
 }
@@ -31,24 +36,28 @@ interface DetailModalProps {
   isOpen: boolean;
   onClose: () => void;
   data: Project | Experience | null;
-  type: 'project' | 'experience';
+  type: "project" | "experience";
 }
 
 const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
   if (!data) return null;
 
-  const isProject = type === 'project';
-  const project = isProject ? data as Project : null;
-  const experience = !isProject ? data as Experience : null;
+  const isProject = type === "project";
+  const project = isProject ? (data as Project) : null;
+  const experience = !isProject ? (data as Experience) : null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-card/95 backdrop-blur-lg border border-border/30">
         <DialogHeader>
           <div className="flex items-start gap-4 mb-4">
-            <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${
-              isProject ? project?.gradient : experience?.color
-            } flex items-center justify-center text-2xl shadow-lg flex-shrink-0`}>
+            <div
+              className={`w-16 h-16 rounded-xl bg-gradient-to-br ${
+                isProject
+                  ? project?.gradient
+                  : experience?.color || "from-gray-500 to-gray-600"
+              } flex items-center justify-center text-2xl shadow-lg flex-shrink-0`}
+            >
               {isProject ? project?.image : experience?.logo}
             </div>
             <div className="flex-1">
@@ -92,10 +101,15 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
           {/* Key Features/Achievements */}
           {isProject && project?.features && (
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-3">Key Features</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Key Features
+              </h3>
               <ul className="space-y-2">
                 {project.features.map((feature, idx) => (
-                  <li key={idx} className="text-card-foreground/80 flex items-start gap-2">
+                  <li
+                    key={idx}
+                    className="text-card-foreground/80 flex items-start gap-2"
+                  >
                     <span className="text-primary mt-1 text-sm">•</span>
                     <span>{feature}</span>
                   </li>
@@ -107,10 +121,15 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
           {/* Experience Achievements */}
           {!isProject && experience?.achievements && (
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-3">Key Achievements</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Key Achievements
+              </h3>
               <ul className="space-y-2">
                 {experience.achievements.map((achievement, idx) => (
-                  <li key={idx} className="text-card-foreground/80 flex items-start gap-2">
+                  <li
+                    key={idx}
+                    className="text-card-foreground/80 flex items-start gap-2"
+                  >
                     <span className="text-primary mt-1 text-sm">•</span>
                     <span>{achievement}</span>
                   </li>
@@ -142,7 +161,7 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
               {project.github && project.github !== "#" && (
                 <Button
                   variant="outline"
-                  onClick={() => window.open(project.github, '_blank')}
+                  onClick={() => window.open(project.github, "_blank")}
                   className="flex-1 group"
                 >
                   <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
@@ -152,7 +171,7 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
               {project.demo && project.demo !== "#" && (
                 <Button
                   variant="hero"
-                  onClick={() => window.open(project.demo, '_blank')}
+                  onClick={() => window.open(project.demo, "_blank")}
                   className="flex-1 group"
                 >
                   <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />

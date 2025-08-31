@@ -115,13 +115,8 @@ export default {
 				'glow': 'glow 2s ease-in-out infinite',
 				'carousel-rotate': 'carousel-rotate 20s linear infinite'
 			},
-			transitionProperty: {
-				'smooth': 'all',
-			},
-			transitionTimingFunction: {
-				'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
-			}
+			// Removed conflicting transition properties to prevent Framer Motion conflicts
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	// plugins: [require("tailwindcss-animate")], // Temporarily disabled to prevent Framer Motion conflicts
 } satisfies Config;

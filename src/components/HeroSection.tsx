@@ -34,7 +34,7 @@ const HeroSection = () => {
                 {skills.map((skill, index) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 bg-card/60 backdrop-blur-sm border border-card-border/30 rounded-full text-sm font-medium text-card-foreground hover:bg-card-hover transition-smooth animate-slide-in"
+                    className="px-4 py-2 bg-card/60 backdrop-blur-sm border border-card-border/30 rounded-full text-sm font-medium text-card-foreground hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 animate-slide-in"
                     style={{
                       animationDelay: `${index * 0.1}s`,
                     }}
@@ -65,7 +65,7 @@ const HeroSection = () => {
                 onClick={() =>
                   window.open("https://github.com/michael-jw-ji", "_blank")
                 }
-                className="group"
+                className="group hover:bg-gray-200 dark:hover:bg-gray-700"
               >
                 <Github className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 GitHub
@@ -74,7 +74,9 @@ const HeroSection = () => {
               <Button
                 variant="outline"
                 size="lg"
-                onClick={() => window.open("/resume.pdf", "_blank")}
+                onClick={() =>
+                  window.open("/f25_resume_michael_ji.pdf", "_blank")
+                }
                 className="group"
               >
                 <FileText className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />

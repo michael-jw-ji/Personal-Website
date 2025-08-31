@@ -1,18 +1,22 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import DetailModal from "./DetailModal";
 
 const ProjectsSection = () => {
   const [currentProject, setCurrentProject] = useState(0);
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [selectedProject, setSelectedProject] = useState<
+    (typeof projects)[0] | null
+  >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
     {
       id: 1,
       title: "WhyAmIBroke",
-      description: "Full-stack expense tracking app with RAG pipeline using Brave Web Search API and LLM agents. Features real-time financial insights and Docker deployment.",
+      description:
+        "Full-stack expense tracking app with RAG pipeline using Brave Web Search API and LLM agents. Features real-time financial insights and Docker deployment.",
       image: "💰",
       gradient: "from-green-500 to-emerald-500",
       tech: ["RAG", "LLM Agents", "Flask", "PostgreSQL", "Docker", "RabbitMQ"],
@@ -22,13 +26,14 @@ const ProjectsSection = () => {
         "20% improvement in expense classification accuracy",
         "Microservice architecture with modular LLM agents",
         "Real-time financial insights and budgeting",
-        "Containerized deployment with Docker"
-      ]
+        "Containerized deployment with Docker",
+      ],
     },
     {
       id: 2,
       title: "StockSenseAI",
-      description: "Advanced stock analysis platform with integrated sentiment analysis and 30+ days of historical data preprocessing for ML prediction models.",
+      description:
+        "Advanced stock analysis platform with integrated sentiment analysis and 30+ days of historical data preprocessing for ML prediction models.",
       image: "📈",
       gradient: "from-blue-500 to-purple-500",
       tech: ["Python", "Flask", "React", "TypeScript", "TensorFlow", "VADER"],
@@ -38,13 +43,14 @@ const ProjectsSection = () => {
         "Real-time stock sentiment analysis",
         "Interactive React/TypeScript frontend",
         "MLPRegressor models for prediction",
-        "20-day moving averages and 100+ news articles analysis"
-      ]
+        "20-day moving averages and 100+ news articles analysis",
+      ],
     },
     {
       id: 3,
-      title: "KC Badminton Platform",
-      description: "Scalable website and management system that grew monthly users to 10,000+ with 35% performance improvements through JavaScript optimization.",
+      title: "Club Website",
+      description:
+        "Scalable website and management system that grew monthly users to 10,000+ with 35% performance improvements through JavaScript optimization.",
       image: "🏸",
       gradient: "from-orange-500 to-red-500",
       tech: ["React", "HTML/CSS", "JavaScript", "Node.js", "Bootstrap"],
@@ -54,9 +60,50 @@ const ProjectsSection = () => {
         "10,000+ monthly active users",
         "35% performance improvement",
         "Responsive cross-device compatibility",
-        "SEO optimization and Google Analytics"
-      ]
-    }
+        "SEO optimization and Google Analytics",
+      ],
+    },
+    {
+      id: 4,
+      title: "Eagle Eye Surveillance",
+      description:
+        "ESP32-CAM web-based surveillance system with motion detection, cloud integration, and real-time streaming. Features PIR sensors and Google Drive storage.",
+      image: "📹",
+      gradient: "from-indigo-500 to-cyan-500",
+      tech: ["ESP32-CAM", "FreeRTOS", "C/C++", "Node.js", "Express", "React"],
+      github: "https://github.com/CeanLiu/eagle-eye",
+      demo: "#",
+      features: [
+        "Motion detection with PIR sensors",
+        "Real-time video streaming",
+        "Cloud storage integration with Google Drive",
+        "ESP32-CAM with FreeRTOS for efficient task management",
+      ],
+    },
+    {
+      id: 5,
+      title: "Stock Market Predictor",
+      description:
+        "Machine learning project for stock market trend forecasting using historical data analysis and predictive modeling in Jupyter Notebook.",
+      image: "📊",
+      gradient: "from-emerald-500 to-teal-500",
+      tech: [
+        "Python",
+        "Jupyter Notebook",
+        "Machine Learning",
+        "Data Analysis",
+        "Pandas",
+        "NumPy",
+      ],
+      github: "https://github.com/michael-jw-ji/Stock-Market-Predictor",
+      demo: "#",
+      features: [
+        "Historical stock data processing and visualization",
+        "Machine learning algorithms for price prediction",
+        "Clean data visualizations and model outputs",
+        "Jupyter Notebook-based development environment",
+      ],
+    },
   ];
 
   const nextProject = () => {
@@ -67,8 +114,15 @@ const ProjectsSection = () => {
     setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
+  const goToProject = (index: number) => {
+    setCurrentProject(index);
+  };
+
   return (
-    <section id="projects" className="py-20 bg-gradient-to-b from-card/10 to-transparent">
+    <section
+      id="projects"
+      className="py-20 bg-gradient-to-b from-card/10 to-transparent"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in">
@@ -80,7 +134,9 @@ const ProjectsSection = () => {
           </p>
           <Button
             variant="ghost"
-            onClick={() => window.open('https://github.com/michael-jw-ji', '_blank')}
+            onClick={() =>
+              window.open("https://github.com/michael-jw-ji", "_blank")
+            }
             className="text-primary hover:text-primary-glow"
           >
             Want to see more? Check out my GitHub
@@ -89,33 +145,60 @@ const ProjectsSection = () => {
         </div>
 
         {/* 3D Carousel */}
-        <div className="relative max-w-5xl mx-auto">
-          <div className="relative h-[600px] flex items-center justify-center perspective-1000">
-            {projects.map((project, index) => {
-              const isActive = index === currentProject;
-              const offset = index - currentProject;
+        <div className="relative max-w-7xl mx-auto">
+          <div className="relative h-[700px] flex items-center justify-center perspective-1000">
+            {Array.from({ length: 5 }, (_, i) => {
+              const offset = i - 2; // -2, -1, 0, 1, 2
+              const projectIndex =
+                (currentProject + offset + projects.length) % projects.length;
+              const project = projects[projectIndex];
+              const isActive = offset === 0;
+
+              // Calculate size and properties based on distance from center
               const absOffset = Math.abs(offset);
-              
+              let scale;
+
+              if (absOffset === 0) {
+                // Center project - largest
+                scale = 1.0;
+              } else if (absOffset === 1) {
+                // Adjacent projects - medium
+                scale = 0.85;
+              } else {
+                // Outermost projects - smallest
+                scale = 0.7;
+              }
+
               return (
-                <div
-                  key={project.id}
-                  className={`absolute w-80 h-96 transition-all duration-700 ease-out transform-gpu ${
-                    isActive 
-                      ? 'z-20 scale-110' 
-                      : absOffset === 1 
-                      ? 'z-10 scale-95' 
-                      : 'z-0 scale-75 opacity-30'
-                  }`}
+                <motion.div
+                  key={i}
+                  className="absolute w-[420px] h-[540px] transform-gpu cursor-pointer"
+                  animate={{
+                    x: offset * 180,
+                    rotateY: offset * 25,
+                    translateZ:
+                      absOffset === 0 ? 50 : absOffset === 1 ? 0 : -50,
+                    scale: scale,
+                    zIndex: absOffset === 0 ? 30 : absOffset === 1 ? 20 : 10,
+                    opacity: absOffset === 0 ? 1 : absOffset === 1 ? 0.8 : 0.6,
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    ease: [0.25, 0.8, 0.25, 1],
+                  }}
                   style={{
-                    transform: `translateX(${offset * 120}px) rotateY(${offset * 15}deg) ${
-                      isActive ? 'translateZ(0px)' : 'translateZ(-100px)'
-                    }`,
+                    transformStyle: "preserve-3d",
+                  }}
+                  onClick={() => {
+                    setCurrentProject(projectIndex);
                   }}
                 >
-                  <div className="glass-card h-full p-6 rounded-2xl group hover:scale-105 transition-smooth">
+                  <div className="glass-card h-full p-8 rounded-2xl flex flex-col justify-between group hover:scale-105 transition-transform duration-300">
                     {/* Project Header */}
                     <div className="text-center mb-6">
-                      <div className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-3xl shadow-lg mb-4`}>
+                      <div
+                        className={`w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-4xl shadow-lg mb-4`}
+                      >
                         {project.image}
                       </div>
                       <h3 className="text-2xl font-bold text-foreground mb-2">
@@ -124,16 +207,16 @@ const ProjectsSection = () => {
                     </div>
 
                     {/* Project Description */}
-                    <p className="text-card-foreground/80 text-sm leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-card-foreground/80 text-sm leading-relaxed mb-6 line-clamp-4">
                       {project.description}
                     </p>
 
                     {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-1 mb-4">
+                    <div className="flex flex-wrap gap-2 mb-6">
                       {project.tech.slice(0, 4).map((tech) => (
                         <span
                           key={tech}
-                          className="px-2 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full border border-border/30"
+                          className="px-3 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full border border-border/30"
                         >
                           {tech}
                         </span>
@@ -145,13 +228,15 @@ const ProjectsSection = () => {
                       )}
                     </div>
 
-
                     {/* Action Buttons */}
-                    <div className="flex gap-2 mt-auto pt-4">
+                    <div className="flex gap-3 mt-auto pt-6 pb-4">
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => window.open(project.github, '_blank')}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.github, "_blank");
+                        }}
                         className="flex-1 group"
                       >
                         <Github className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
@@ -160,7 +245,8 @@ const ProjectsSection = () => {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           setSelectedProject(project);
                           setIsModalOpen(true);
                         }}
@@ -171,7 +257,7 @@ const ProjectsSection = () => {
                       </Button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -186,20 +272,22 @@ const ProjectsSection = () => {
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
-            
+
             {/* Dots Indicator */}
             <div className="flex items-center gap-2">
               {projects.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentProject(index)}
-                  className={`w-2 h-2 rounded-full transition-smooth ${
-                    index === currentProject ? 'bg-primary' : 'bg-muted-foreground/30'
+                  onClick={() => goToProject(index)}
+                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                    index === currentProject
+                      ? "bg-primary"
+                      : "bg-muted-foreground/30"
                   }`}
                 />
               ))}
             </div>
-            
+
             <Button
               variant="glass"
               size="icon"

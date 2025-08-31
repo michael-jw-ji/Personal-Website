@@ -2,6 +2,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar, MapPin } from "lucide-react";
 import DetailModal from "./DetailModal";
+import algoverseLogo from "@/assets/algoverse_logo.jpeg";
+import mackenzieHealthLogo from "@/assets/mackenzie_health_logo.jpg";
+import kcBadmintonLogo from "@/assets/kc_badminton_club_logo.jpeg";
+import badmintonCanadaLogo from "@/assets/badminton_canada_logo.png";
+import bwfLogo from "@/assets/bwf_logo.jpg";
 
 const ExperienceSection = () => {
   const [selectedExperience, setSelectedExperience] = useState<
@@ -15,11 +20,10 @@ const ExperienceSection = () => {
       role: "Machine Learning Research Engineer Intern",
       company: "Algoverse",
       period: "April 2025 - Present",
-      location: "Remote",
+      location: "Remote (San Francisco, CA)",
       description:
         "Automated dataset preprocessing and experiment orchestration using Bash and NumPy, reducing setup time by 75%. Optimized GPU utilization and runtime performance with PyTorch and CUDA memory profiling. Implemented distributed training frameworks and model parallelization techniques.",
-      logo: "🤖",
-      color: "from-blue-500 to-cyan-500",
+      logo: algoverseLogo,
       skills: [
         "Python",
         "PyTorch",
@@ -44,8 +48,7 @@ const ExperienceSection = () => {
       location: "Richmond Hill, ON",
       description:
         "Managed on-premises and cloud virtualized EMR systems on AWS and Azure, enhancing performance and reducing downtime by 30%. Upgraded hospital network infrastructure from 100GB to 400GB with comprehensive security protocols.",
-      logo: "🏥",
-      color: "from-emerald-500 to-teal-500",
+      logo: mackenzieHealthLogo,
       skills: [
         "AWS",
         "Azure",
@@ -64,14 +67,13 @@ const ExperienceSection = () => {
     },
     {
       id: 3,
-      role: "Software Developer",
+      role: "Software Developer ",
       company: "KC Badminton Club",
       period: "August 2024 - August 2025",
       location: "Markham, ON",
       description:
         "Built scalable website and management system using React and Node.js, improving user experience and growing monthly users to over 10,000. Enhanced performance by 35% with JavaScript optimizations and SEO improvements.",
-      logo: "🏸",
-      color: "from-purple-500 to-pink-500",
+      logo: kcBadmintonLogo,
       skills: [
         "React",
         "Node.js",
@@ -113,37 +115,36 @@ const ExperienceSection = () => {
           {experiences.map((exp, index) => (
             <div
               key={exp.id}
-              className="glass-card p-8 rounded-2xl hover:scale-105 transition-smooth group animate-fade-in flex flex-col h-full"
+              className="glass-card p-8 rounded-2xl hover:scale-105 transition-transform duration-300 group animate-fade-in flex flex-col h-full border-0"
               style={{ animationDelay: `${index * 0.2}s` }}
             >
               {/* Logo and Header */}
-              <div className="flex items-start justify-between mb-6">
+              <div className="flex items-start gap-4 mb-6">
                 <div
-                  className={`w-16 h-16 rounded-xl bg-gradient-to-br ${exp.color} flex items-center justify-center text-2xl shadow-lg`}
+                  className="w-15 h-15 rounded-xl flex items-center justify-center overflow-hidden flex-shrink-0"
+                  style={{ boxShadow: "0 8px 12px #000c" }}
                 >
-                  {exp.logo}
+                  <img
+                    src={exp.logo}
+                    alt={`${exp.company} logo`}
+                    className="w-14 h-14 object-cover rounded-lg"
+                  />
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="opacity-0 group-hover:opacity-100 transition-smooth text-muted-foreground hover:text-primary"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                </Button>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
+                    {exp.role}
+                  </h3>
+                  <p className="text-lg font-semibold text-primary mb-3">
+                    {exp.company}
+                  </p>
+                </div>
               </div>
 
               {/* Content */}
-              <div className="flex flex-col h-full">
+              <div
+                className={`flex flex-col h-full ${exp.id === 3 ? "mt-6" : ""}`}
+              >
                 <div className="flex-1 space-y-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
-                      {exp.role}
-                    </h3>
-                    <p className="text-lg font-semibold text-primary mb-3">
-                      {exp.company}
-                    </p>
-                  </div>
-
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
@@ -181,7 +182,7 @@ const ExperienceSection = () => {
                 <div className="mt-auto pt-4">
                   <Button
                     variant="ghost"
-                    className="w-full group-hover:bg-primary/10 transition-smooth"
+                    className="w-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
                     onClick={() => {
                       setSelectedExperience(exp);
                       setIsModalOpen(true);
@@ -208,7 +209,11 @@ const ExperienceSection = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-primary font-bold text-sm">🏆</span>
+                  <img
+                    src={badmintonCanadaLogo}
+                    alt="Badminton Canada"
+                    className="w-6 h-6 rounded-full"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
@@ -221,7 +226,11 @@ const ExperienceSection = () => {
               </div>
               <div className="flex items-start gap-3">
                 <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-1">
-                  <span className="text-secondary font-bold text-sm">🌍</span>
+                  <img
+                    src={bwfLogo}
+                    alt="BWF World Championships"
+                    className="w-6 h-6 rounded-full"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">

@@ -57,7 +57,7 @@
     --radius: 0.75rem;
     --shadow-elegant: 0 20px 40px -12px hsl(240 100% 4% / 0.6);
     --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Removed transition-smooth to prevent conflicts with Framer Motion */
 
     --sidebar-background: 0 0% 98%;
 
