@@ -145,20 +145,6 @@ const ProjectsSection = () => {
                       )}
                     </div>
 
-                    {/* Key Features */}
-                    {isActive && (
-                      <div className="mb-4 animate-fade-in">
-                        <h4 className="font-semibold text-foreground mb-2 text-sm">Key Features:</h4>
-                        <ul className="space-y-1">
-                          {project.features.slice(0, 2).map((feature, idx) => (
-                            <li key={idx} className="text-xs text-card-foreground/70 flex items-start gap-1">
-                              <span className="text-primary mt-1">•</span>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
 
                     {/* Action Buttons */}
                     <div className="flex gap-2 mt-auto pt-4">

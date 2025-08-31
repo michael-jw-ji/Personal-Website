@@ -24,6 +24,7 @@ interface Experience {
   logo: string;
   color: string;
   skills: string[];
+  achievements: string[];
 }
 
 interface DetailModalProps {
@@ -97,6 +98,21 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
                   <li key={idx} className="text-card-foreground/80 flex items-start gap-2">
                     <span className="text-primary mt-1 text-sm">•</span>
                     <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Experience Achievements */}
+          {!isProject && experience?.achievements && (
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-3">Key Achievements</h3>
+              <ul className="space-y-2">
+                {experience.achievements.map((achievement, idx) => (
+                  <li key={idx} className="text-card-foreground/80 flex items-start gap-2">
+                    <span className="text-primary mt-1 text-sm">•</span>
+                    <span>{achievement}</span>
                   </li>
                 ))}
               </ul>
