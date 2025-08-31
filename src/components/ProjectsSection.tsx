@@ -16,7 +16,7 @@ const ProjectsSection = () => {
       image: "💰",
       gradient: "from-green-500 to-emerald-500",
       tech: ["RAG", "LLM Agents", "Flask", "PostgreSQL", "Docker", "RabbitMQ"],
-      github: "https://github.com/michael-jw-ji/WhyAmIBroke",
+      github: "https://github.com/ivanccheng/personal-budget",
       demo: "#",
       features: [
         "20% improvement in expense classification accuracy",
