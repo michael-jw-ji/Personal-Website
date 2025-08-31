@@ -110,7 +110,7 @@ const FeaturesSection = () => {
           className="mt-16 text-center animate-fade-in"
           style={{ animationDelay: "0.6s" }}
         >
-          <div className="glass-card p-8 rounded-2xl max-w-4xl mx-auto">
+          <div className="glass-card p-8 rounded-2xl">
             <h3 className="text-2xl font-bold text-gradient mb-6">
               Technical Proficiency
             </h3>

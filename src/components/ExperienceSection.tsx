@@ -7,6 +7,8 @@ import mackenzieHealthLogo from "@/assets/mackenzie_health_logo.jpg";
 import kcBadmintonLogo from "@/assets/kc_badminton_club_logo.jpeg";
 import badmintonCanadaLogo from "@/assets/badminton_canada_logo.png";
 import bwfLogo from "@/assets/bwf_logo.jpg";
+import awsLogo from "@/assets/aws_logo.jpg";
+import deeplearningAiLogo from "@/assets/deeplearning.ai_logo.png";
 
 const ExperienceSection = () => {
   const [selectedExperience, setSelectedExperience] = useState<
@@ -20,7 +22,7 @@ const ExperienceSection = () => {
       role: "Machine Learning Research Engineer Intern",
       company: "Algoverse",
       period: "April 2025 - Present",
-      location: "Remote (San Francisco, CA)",
+      location: "Remote (Palo Alto, CA)",
       description:
         "Automated dataset preprocessing and experiment orchestration using Bash and NumPy, reducing setup time by 75%. Optimized GPU utilization and runtime performance with PyTorch and CUDA memory profiling. Implemented distributed training frameworks and model parallelization techniques.",
       logo: algoverseLogo,
@@ -202,17 +204,17 @@ const ExperienceSection = () => {
           className="mt-16 text-center animate-fade-in"
           style={{ animationDelay: "0.6s" }}
         >
-          <div className="glass-card p-8 rounded-2xl max-w-3xl mx-auto">
+          <div className="glass-card p-8 rounded-2xl">
             <h3 className="text-2xl font-bold text-gradient mb-4">
-              Notable Achievements
+              Awards/Certifications
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-14 h-14 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0 -mt-1 overflow-hidden">
                   <img
                     src={badmintonCanadaLogo}
                     alt="Badminton Canada"
-                    className="w-6 h-6 rounded-full"
+                    className="w-10 h-10 object-cover rounded-lg scale-125"
                   />
                 </div>
                 <div>
@@ -220,24 +222,60 @@ const ExperienceSection = () => {
                     Multiple-time National Elite Champion
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    Canadian Men's Singles Badminton
+                    Singles, Doubles, and Mixed Doubles
                   </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-1">
+                <div className="w-14 h-14 rounded-xl bg-secondary/20 flex items-center justify-center flex-shrink-0 -mt-1 overflow-hidden">
                   <img
                     src={bwfLogo}
                     alt="BWF World Championships"
-                    className="w-6 h-6 rounded-full"
+                    className="w-10 h-10 object-cover rounded-lg scale-125"
                   />
                 </div>
                 <div>
                   <p className="font-semibold text-foreground">
-                    World Championships Finalist
+                    World Championships Representative
                   </p>
                   <p className="text-sm text-muted-foreground">
                     2023/2024 World Junior Championships
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 -mt-1 overflow-hidden">
+                  <img
+                    src={awsLogo}
+                    alt="AWS Certification"
+                    className="w-12 h-12 object-cover rounded-lg"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">
+                    AWS Certification
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    AWAS Cloud Technical Essentials, Architecting Solutions on AWS, Building Data Lakes on AWS
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 -mt-1 overflow-hidden">
+                  <img
+                    src={deeplearningAiLogo}
+                    alt="DeepLearning.AI Certification"
+                    className="w-12 h-12 object-cover rounded-lg"
+                  />
+                </div>
+                <div>
+                  <p className="font-semibold text-foreground">
+                    DeepLearning.AI Certification
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Advanced Learning Algorithms, Unsupervised Learning:
+                    Recommenders, Reinforcement Learning, Supervised Machine
+                    Learning: Regression and Classification
                   </p>
                 </div>
               </div>

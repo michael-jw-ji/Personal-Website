@@ -48,18 +48,29 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-card/95 backdrop-blur-lg border border-border/30">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-lg border border-border/30">
         <DialogHeader>
-          <div className="flex items-start gap-4 mb-4">
-            <div
-              className={`w-16 h-16 rounded-xl bg-gradient-to-br ${
-                isProject
-                  ? project?.gradient
-                  : experience?.color || "from-gray-500 to-gray-600"
-              } flex items-center justify-center text-2xl shadow-lg flex-shrink-0`}
-            >
-              {isProject ? project?.image : experience?.logo}
+          {/* Large Project Image at Top */}
+          {isProject && project?.image && (
+            <div className="w-full h-64 rounded-xl overflow-hidden shadow-lg mb-6 bg-white/10 backdrop-blur-sm">
+              <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                className="w-full h-full object-cover"
+              />
             </div>
+          )}
+
+          <div className="flex items-start gap-4 mb-4">
+            {!isProject && (
+              <div className="w-16 h-16 rounded-xl bg-white/10 backdrop-blur-lg flex items-center justify-center text-2xl shadow-lg flex-shrink-0 overflow-hidden">
+                <img
+                  src={experience?.logo}
+                  alt={`${experience?.company} logo`}
+                  className="w-14 h-14 object-cover rounded-lg"
+                />
+              </div>
+            )}
             <div className="flex-1">
               <DialogTitle className="text-2xl font-bold text-foreground mb-2">
                 {isProject ? project?.title : experience?.role}

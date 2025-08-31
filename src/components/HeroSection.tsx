@@ -34,7 +34,7 @@ const HeroSection = () => {
                 {skills.map((skill, index) => (
                   <span
                     key={skill}
-                    className="px-4 py-2 bg-card/60 backdrop-blur-sm border border-card-border/30 rounded-full text-sm font-medium text-card-foreground hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 animate-slide-in"
+                    className="px-4 py-2 bg-card/60 backdrop-blur-sm border border-card-border/30 rounded-full text-sm font-medium text-card-foreground hover:bg-card/80 hover:border-card-border/50 transition-colors duration-300 animate-slide-in"
                     style={{
                       animationDelay: `${index * 0.1}s`,
                     }}

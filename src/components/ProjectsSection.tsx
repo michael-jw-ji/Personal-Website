@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 import DetailModal from "./DetailModal";
 
+// Project images
+import whyAmIBrokeImage from "@/assets/whyamibroke_website.png";
+import stocksenseaiImage from "@/assets/stocksenseai_website.png";
+import kcBadmintonImage from "@/assets/kc_badminton_club_website.png";
+import eagleEyeImage from "@/assets/eagle_eye_website.png";
+import stockPredictorImage from "@/assets/stock_market_predictor_graph.png";
+
 const ProjectsSection = () => {
-  const [currentProject, setCurrentProject] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
   const [selectedProject, setSelectedProject] = useState<
     (typeof projects)[0] | null
   >(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Auto-scroll effect - continuous movement
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTranslateX((prev) => prev - 1); // Move 1px left every interval
+    }, 20); // Smooth movement every 20ms
+
+    return () => clearInterval(interval);
+  }, []);
 
   const projects = [
     {
@@ -17,7 +33,7 @@ const ProjectsSection = () => {
       title: "WhyAmIBroke",
       description:
         "Full-stack expense tracking app with RAG pipeline using Brave Web Search API and LLM agents. Features real-time financial insights and Docker deployment.",
-      image: "💰",
+      image: whyAmIBrokeImage,
       gradient: "from-green-500 to-emerald-500",
       tech: ["RAG", "LLM Agents", "Flask", "PostgreSQL", "Docker", "RabbitMQ"],
       github: "https://github.com/ivanccheng/personal-budget",
@@ -34,7 +50,7 @@ const ProjectsSection = () => {
       title: "StockSenseAI",
       description:
         "Advanced stock analysis platform with integrated sentiment analysis and 30+ days of historical data preprocessing for ML prediction models.",
-      image: "📈",
+      image: stocksenseaiImage,
       gradient: "from-blue-500 to-purple-500",
       tech: ["Python", "Flask", "React", "TypeScript", "TensorFlow", "VADER"],
       github: "https://github.com/michael-jw-ji/StockSenseAI",
@@ -51,7 +67,7 @@ const ProjectsSection = () => {
       title: "Club Website",
       description:
         "Scalable website and management system that grew monthly users to 10,000+ with 35% performance improvements through JavaScript optimization.",
-      image: "🏸",
+      image: kcBadmintonImage,
       gradient: "from-orange-500 to-red-500",
       tech: ["React", "HTML/CSS", "JavaScript", "Node.js", "Bootstrap"],
       github: "#",
@@ -68,7 +84,7 @@ const ProjectsSection = () => {
       title: "Eagle Eye Surveillance",
       description:
         "ESP32-CAM web-based surveillance system with motion detection, cloud integration, and real-time streaming. Features PIR sensors and Google Drive storage.",
-      image: "📹",
+      image: eagleEyeImage,
       gradient: "from-indigo-500 to-cyan-500",
       tech: ["ESP32-CAM", "FreeRTOS", "C/C++", "Node.js", "Express", "React"],
       github: "https://github.com/CeanLiu/eagle-eye",
@@ -85,7 +101,7 @@ const ProjectsSection = () => {
       title: "Stock Market Predictor",
       description:
         "Machine learning project for stock market trend forecasting using historical data analysis and predictive modeling in Jupyter Notebook.",
-      image: "📊",
+      image: stockPredictorImage,
       gradient: "from-emerald-500 to-teal-500",
       tech: [
         "Python",
@@ -106,17 +122,10 @@ const ProjectsSection = () => {
     },
   ];
 
-  const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length);
-  };
-
-  const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
-  };
-
-  const goToProject = (index: number) => {
-    setCurrentProject(index);
-  };
+  // Create multiple copies for truly infinite scroll
+  const duplicatedProjects = [...projects, ...projects, ...projects];
+  const cardWidth = 400; // Card width + gap
+  const resetPoint = projects.length * cardWidth;
 
   return (
     <section
@@ -144,158 +153,92 @@ const ProjectsSection = () => {
           </Button>
         </div>
 
-        {/* 3D Carousel */}
-        <div className="relative max-w-7xl mx-auto">
-          <div className="relative h-[700px] flex items-center justify-center perspective-1000">
-            {Array.from({ length: 5 }, (_, i) => {
-              const offset = i - 2; // -2, -1, 0, 1, 2
-              const projectIndex =
-                (currentProject + offset + projects.length) % projects.length;
-              const project = projects[projectIndex];
-              const isActive = offset === 0;
+        {/* Continuous Horizontal Scrolling Carousel */}
+        <div className="relative overflow-hidden max-w-[1240px] mx-auto py-8">
+          {/* Left gradient fade */}
+          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
 
-              // Calculate size and properties based on distance from center
-              const absOffset = Math.abs(offset);
-              let scale;
-
-              if (absOffset === 0) {
-                // Center project - largest
-                scale = 1.0;
-              } else if (absOffset === 1) {
-                // Adjacent projects - medium
-                scale = 0.85;
-              } else {
-                // Outermost projects - smallest
-                scale = 0.7;
-              }
-
-              return (
-                <motion.div
-                  key={i}
-                  className="absolute w-[420px] h-[540px] transform-gpu cursor-pointer"
-                  animate={{
-                    x: offset * 180,
-                    rotateY: offset * 25,
-                    translateZ:
-                      absOffset === 0 ? 50 : absOffset === 1 ? 0 : -50,
-                    scale: scale,
-                    zIndex: absOffset === 0 ? 30 : absOffset === 1 ? 20 : 10,
-                    opacity: absOffset === 0 ? 1 : absOffset === 1 ? 0.8 : 0.6,
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.25, 0.8, 0.25, 1],
-                  }}
-                  style={{
-                    transformStyle: "preserve-3d",
-                  }}
-                  onClick={() => {
-                    setCurrentProject(projectIndex);
-                  }}
-                >
-                  <div className="glass-card h-full p-8 rounded-2xl flex flex-col justify-between group hover:scale-105 transition-transform duration-300">
-                    {/* Project Header */}
-                    <div className="text-center mb-6">
-                      <div
-                        className={`w-24 h-24 mx-auto rounded-2xl bg-gradient-to-br ${project.gradient} flex items-center justify-center text-4xl shadow-lg mb-4`}
-                      >
-                        {project.image}
-                      </div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">
-                        {project.title}
-                      </h3>
+          {/* Right gradient fade */}
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+          <div
+            className="flex gap-8 transition-none"
+            style={{
+              transform: `translateX(${translateX % resetPoint}px)`,
+              width: `${duplicatedProjects.length * cardWidth}px`,
+            }}
+          >
+            {duplicatedProjects.map((project, index) => (
+              <div
+                key={`${project.id}-${Math.floor(
+                  index / projects.length
+                )}-${index}`}
+                className="flex-shrink-0 w-[360px] my-4"
+              >
+                <div className="glass-card h-[520px] p-6 rounded-2xl flex flex-col justify-between group hover:scale-105 transition-transform duration-300">
+                  {/* Project Header */}
+                  <div className="text-center mb-3">
+                    <div className="w-56 h-42 mx-auto rounded-2xl overflow-hidden shadow-lg mb-3 bg-white/10 backdrop-blur-sm">
+                      <img
+                        src={project.image}
+                        alt={`${project.title} preview`}
+                        className="object-cover"
+                        style={{ width: "224px", height: "168px" }}
+                      />
                     </div>
-
-                    {/* Project Description */}
-                    <p className="text-card-foreground/80 text-sm leading-relaxed mb-6 line-clamp-4">
-                      {project.description}
-                    </p>
-
-                    {/* Tech Stack */}
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tech.slice(0, 4).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full border border-border/30"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 4 && (
-                        <span className="px-2 py-1 text-xs text-muted-foreground">
-                          +{project.tech.length - 4} more
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 mt-auto pt-6 pb-4">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          window.open(project.github, "_blank");
-                        }}
-                        className="flex-1 group"
-                      >
-                        <Github className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
-                        Code
-                      </Button>
-                      <Button
-                        variant="default"
-                        size="sm"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedProject(project);
-                          setIsModalOpen(true);
-                        }}
-                        className="flex-1 group"
-                      >
-                        <ExternalLink className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
-                        Learn More
-                      </Button>
-                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-2">
+                      {project.title}
+                    </h3>
                   </div>
-                </motion.div>
-              );
-            })}
-          </div>
 
-          {/* Navigation Buttons */}
-          <div className="flex justify-center gap-4 mt-8">
-            <Button
-              variant="glass"
-              size="icon"
-              onClick={prevProject}
-              className="rounded-full"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </Button>
+                  {/* Project Description */}
+                  <p className="text-card-foreground/80 text-sm leading-relaxed mb-3 line-clamp-3">
+                    {project.description}
+                  </p>
 
-            {/* Dots Indicator */}
-            <div className="flex items-center gap-2">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToProject(index)}
-                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                    index === currentProject
-                      ? "bg-primary"
-                      : "bg-muted-foreground/30"
-                  }`}
-                />
-              ))}
-            </div>
+                  {/* Tech Stack */}
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {project.tech.slice(0, 3).map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full border border-border/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {project.tech.length > 3 && (
+                      <span className="px-2 py-1 text-xs text-muted-foreground">
+                        +{project.tech.length - 3} more
+                      </span>
+                    )}
+                  </div>
 
-            <Button
-              variant="glass"
-              size="icon"
-              onClick={nextProject}
-              className="rounded-full"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
+                  {/* Action Buttons */}
+                  <div className="flex gap-3 mt-auto pt-4">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.open(project.github, "_blank")}
+                      className="flex-1 group"
+                    >
+                      <Github className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
+                      Code
+                    </Button>
+                    <Button
+                      variant="default"
+                      size="sm"
+                      onClick={() => {
+                        setSelectedProject(project);
+                        setIsModalOpen(true);
+                      }}
+                      className="flex-1 group"
+                    >
+                      <ExternalLink className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
+                      Learn More
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
