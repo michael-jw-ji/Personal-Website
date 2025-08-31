@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { Mail, MapPin, Github, Linkedin, Send, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const ContactSection = () => {
@@ -23,13 +23,6 @@ const ContactSection = () => {
       value: "m2ji@uwaterloo.ca",
       href: "mailto:m2ji@uwaterloo.ca",
       color: "from-blue-500 to-cyan-500"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "647-938-0623",
-      href: "tel:647-938-0623",
-      color: "from-green-500 to-emerald-500"
     },
     {
       icon: MapPin,
@@ -54,10 +47,10 @@ const ContactSection = () => {
       color: "from-gray-600 to-gray-400"
     },
     {
-      icon: Mail,
-      label: "Email",
-      href: "mailto:m2ji@uwaterloo.ca",
-      color: "from-red-500 to-orange-500"
+      icon: ExternalLink,
+      label: "Resume",
+      href: "#", // Update this with your actual resume link
+      color: "from-green-500 to-emerald-500"
     }
   ];
 

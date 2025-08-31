@@ -1,7 +1,12 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Calendar, MapPin } from "lucide-react";
+import DetailModal from "./DetailModal";
 
 const ExperienceSection = () => {
+  const [selectedExperience, setSelectedExperience] = useState<typeof experiences[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const experiences = [
     {
       id: 1,
@@ -114,6 +119,10 @@ const ExperienceSection = () => {
                 <Button
                   variant="ghost"
                   className="w-full mt-4 group-hover:bg-primary/10 transition-smooth"
+                  onClick={() => {
+                    setSelectedExperience(exp);
+                    setIsModalOpen(true);
+                  }}
                 >
                   Learn More
                   <ExternalLink className="ml-2 h-4 w-4" />
@@ -149,6 +158,13 @@ const ExperienceSection = () => {
             </div>
           </div>
         </div>
+
+        <DetailModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          data={selectedExperience}
+          type="experience"
+        />
       </div>
     </section>
   );

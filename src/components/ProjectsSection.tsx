@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Github, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import DetailModal from "./DetailModal";
 
 const ProjectsSection = () => {
   const [currentProject, setCurrentProject] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const projects = [
     {
@@ -171,11 +174,14 @@ const ProjectsSection = () => {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => window.open(project.demo, '_blank')}
+                        onClick={() => {
+                          setSelectedProject(project);
+                          setIsModalOpen(true);
+                        }}
                         className="flex-1 group"
                       >
                         <ExternalLink className="mr-1 h-3 w-3 group-hover:scale-110 transition-transform" />
-                        Demo
+                        Learn More
                       </Button>
                     </div>
                   </div>
@@ -218,6 +224,13 @@ const ProjectsSection = () => {
             </Button>
           </div>
         </div>
+
+        <DetailModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          data={selectedProject}
+          type="project"
+        />
       </div>
     </section>
   );
