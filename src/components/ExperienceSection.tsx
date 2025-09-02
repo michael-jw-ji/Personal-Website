@@ -184,7 +184,7 @@ const ExperienceSection = () => {
                 <div className="mt-auto pt-4">
                   <Button
                     variant="ghost"
-                    className="w-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+                    className="w-full hover:bg-muted/20 dark:hover:bg-muted/10 transition-colors duration-300"
                     onClick={() => {
                       setSelectedExperience(exp);
                       setIsModalOpen(true);
@@ -256,7 +256,8 @@ const ExperienceSection = () => {
                     AWS Certification
                   </p>
                   <p className="text-sm text-muted-foreground">
-                    AWAS Cloud Technical Essentials, Architecting Solutions on AWS, Building Data Lakes on AWS
+                    AWAS Cloud Technical Essentials, Architecting Solutions on
+                    AWS, Building Data Lakes on AWS
                   </p>
                 </div>
               </div>

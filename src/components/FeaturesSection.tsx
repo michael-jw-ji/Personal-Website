@@ -154,6 +154,7 @@ const FeaturesSection = () => {
                     "PyTorch",
                     "TensorFlow",
                     "Docker",
+                    "Next.js",
                   ].map((tool) => (
                     <span
                       key={tool}

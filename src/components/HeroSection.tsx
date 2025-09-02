@@ -65,7 +65,7 @@ const HeroSection = () => {
                 onClick={() =>
                   window.open("https://github.com/michael-jw-ji", "_blank")
                 }
-                className="group hover:bg-gray-200 dark:hover:bg-gray-700"
+                className="group hover:bg-muted/20 dark:hover:bg-muted/10"
               >
                 <Github className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 GitHub

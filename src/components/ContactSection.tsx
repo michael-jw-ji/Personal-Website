@@ -3,15 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Mail, MapPin, Github, Linkedin, Send, FileText } from "lucide-react";
 import {
-  Mail,
-  MapPin,
-  Github,
-  Linkedin,
-  Send,
-  ExternalLink,
-} from "lucide-react";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -27,15 +27,15 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "m2ji@uwaterloo.ca",
-      href: "mailto:m2ji@uwaterloo.ca",
+      value: "michael.jw.ji@gmail.com",
+      href: "mailto:michael.jw.ji@gmail.com",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: MapPin,
       label: "Location",
       value: "Waterloo, ON",
-      href: "#",
+      href: "https://www.google.com/maps/place/Waterloo,+ON/@43.4823135,-80.6291208,12z/data=!3m1!4b1!4m6!3m5!1s0x882bf1565ffe672b:0x5037b28c7231d90!8m2!3d43.4642578!4d-80.5204096!16zL20vMGpwa2c?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D",
       color: "from-purple-500 to-pink-500",
     },
   ];
@@ -54,9 +54,9 @@ const ContactSection = () => {
       color: "from-gray-600 to-gray-400",
     },
     {
-      icon: ExternalLink,
+      icon: FileText,
       label: "Resume",
-      href: "#", // Update this with your actual resume link
+      href: "/f25_resume_michael_ji.pdf",
       color: "from-green-500 to-emerald-500",
     },
   ];
@@ -72,16 +72,43 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // EmailJS configuration - using environment variables for security
+      const serviceId =
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId =
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+      const publicKey =
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 
-    toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+      // Template parameters that will be sent to your email template
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: "Michael Ji", // Your name
+      };
 
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for reaching out. I'll get back to you soon.",
+      });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast({
+        title: "Failed to send message",
+        description:
+          "Something went wrong. Please try again or contact me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -116,6 +143,8 @@ const ContactSection = () => {
                     <a
                       key={item.label}
                       href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-4 p-4 rounded-xl hover:bg-card-hover transition-colors duration-300 group"
                     >
                       <div
@@ -140,18 +169,20 @@ const ContactSection = () => {
               <h3 className="text-xl font-bold text-foreground mb-6">
                 Connect with me
               </h3>
-              <div className="flex gap-4">
+              <div className="flex gap-6 justify-between">
                 {socialLinks.map((social) => {
                   const IconComponent = social.icon;
                   return (
                     <Button
                       key={social.label}
                       variant="ghost"
-                      size="icon"
                       onClick={() => window.open(social.href, "_blank")}
-                      className="w-12 h-12 rounded-xl hover:scale-110 transition-transform duration-300 group"
+                      className="flex items-center gap-2 p-3 h-auto rounded-xl hover:scale-105 transition-transform duration-300 group flex-1"
                     >
-                      <IconComponent className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <IconComponent className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      <span className="text-foreground font-medium group-hover:text-primary transition-colors">
+                        {social.label}
+                      </span>
                     </Button>
                   );
                 })}
