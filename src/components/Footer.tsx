@@ -17,7 +17,7 @@ const Footer = () => {
     },
     {
       icon: Mail,
-      href: "mailto:m2ji@uwaterloo.ca",
+      href: "mailto:michael.jw.ji@gmail.com",
       label: "Email",
     },
   ];
