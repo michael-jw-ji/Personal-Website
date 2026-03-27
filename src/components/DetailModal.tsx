@@ -11,8 +11,9 @@ interface Project {
   id: number;
   title: string;
   description: string;
+  /** Longer overview for flagship projects; falls back to description */
+  featuredStory?: string;
   image: string;
-  gradient: string;
   tech: string[];
   github: string;
   demo: string;
@@ -25,7 +26,8 @@ interface Experience {
   company: string;
   period: string;
   location: string;
-  description: string;
+  /** One-sentence overview; full detail is in achievements */
+  summary: string;
   logo: string;
   color?: string;
   skills: string[];
@@ -99,13 +101,15 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
         </DialogHeader>
 
         <div className="space-y-6">
-          {/* Description */}
+          {/* Description / overview */}
           <div>
             <h3 className="text-lg font-semibold text-foreground mb-3">
-              {isProject ? "Project Overview" : "Role Description"}
+              {isProject ? "Project Overview" : "Overview"}
             </h3>
             <p className="text-card-foreground/80 leading-relaxed">
-              {isProject ? project?.description : experience?.description}
+              {isProject
+                ? project?.featuredStory ?? project?.description
+                : experience?.summary}
             </p>
           </div>
 
@@ -173,9 +177,9 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
                 <Button
                   variant="outline"
                   onClick={() => window.open(project.github, "_blank")}
-                  className="flex-1 group"
+                  className="flex-1"
                 >
-                  <Github className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <Github className="mr-2 h-4 w-4" />
                   View Code
                 </Button>
               )}
@@ -183,9 +187,9 @@ const DetailModal = ({ isOpen, onClose, data, type }: DetailModalProps) => {
                 <Button
                   variant="hero"
                   onClick={() => window.open(project.demo, "_blank")}
-                  className="flex-1 group"
+                  className="flex-1"
                 >
-                  <ExternalLink className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform" />
+                  <ExternalLink className="mr-2 h-4 w-4" />
                   Live Demo
                 </Button>
               )}

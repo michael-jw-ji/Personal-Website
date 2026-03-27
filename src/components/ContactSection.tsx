@@ -3,15 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, MapPin, Github, Linkedin, Send, FileText } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
+
+function emailJsErrorMessage(error: unknown): string {
+  if (error && typeof error === "object") {
+    const o = error as { text?: string; message?: string; status?: number };
+    if (typeof o.text === "string" && o.text.length > 0) return o.text;
+    if (typeof o.message === "string" && o.message.length > 0) return o.message;
+  }
+  if (error instanceof Error) return error.message;
+  return "Unknown error";
+}
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -22,44 +26,6 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "michael.jw.ji@gmail.com",
-      href: "mailto:michael.jw.ji@gmail.com",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Waterloo, ON",
-      href: "https://www.google.com/maps/place/Waterloo,+ON/@43.4823135,-80.6291208,12z/data=!3m1!4b1!4m6!3m5!1s0x882bf1565ffe672b:0x5037b28c7231d90!8m2!3d43.4642578!4d-80.5204096!16zL20vMGpwa2c?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D",
-      color: "from-purple-500 to-pink-500",
-    },
-  ];
-
-  const socialLinks = [
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      href: "https://linkedin.com/in/michael-jw-ji",
-      color: "from-blue-600 to-blue-400",
-    },
-    {
-      icon: Github,
-      label: "GitHub",
-      href: "https://github.com/michael-jw-ji",
-      color: "from-gray-600 to-gray-400",
-    },
-    {
-      icon: FileText,
-      label: "Resume",
-      href: "/f25_resume_michael_ji.pdf",
-      color: "from-green-500 to-emerald-500",
-    },
-  ];
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -72,22 +38,28 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      // EmailJS configuration - using environment variables for security
-      const serviceId =
-        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
-      const templateId =
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
-      const publicKey =
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID?.trim() ?? "";
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID?.trim() ?? "";
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY?.trim() ?? "";
 
-      // Template parameters that will be sent to your email template
+    if (!serviceId || !templateId || !publicKey) {
+      toast({
+        title: "Email not configured",
+        description:
+          "Set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY in .env, then stop and run npm run dev again.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
         subject: formData.subject,
         message: formData.message,
-        to_name: "Michael Ji", // Your name
+        to_name: "Michael Ji",
       };
 
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
@@ -100,10 +72,13 @@ const ContactSection = () => {
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error) {
       console.error("EmailJS Error:", error);
+      const detail = emailJsErrorMessage(error);
       toast({
         title: "Failed to send message",
         description:
-          "Something went wrong. Please try again or contact me directly.",
+          detail.length > 120
+            ? `${detail.slice(0, 117)}...`
+            : detail || "Check the browser console and your EmailJS template variables.",
         variant: "destructive",
       });
     } finally {
@@ -117,87 +92,33 @@ const ContactSection = () => {
       className="py-20 bg-gradient-to-b from-card/10 to-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4">
-            Get in <span className="text-gradient">Touch</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Let's collaborate on your next project or discuss opportunities in
-            tech and innovation
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="animate-fade-in">
-            <div className="glass-card p-8 rounded-2xl mb-8">
-              <h3 className="text-2xl font-bold text-foreground mb-6">
-                Contact Information
-              </h3>
-
-              <div className="space-y-6">
-                {contactInfo.map((item) => {
-                  const IconComponent = item.icon;
-                  return (
-                    <a
-                      key={item.label}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-4 rounded-xl hover:bg-card-hover transition-colors duration-300 group"
-                    >
-                      <div
-                        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center group-hover:scale-110 transition-transform`}
-                      >
-                        <IconComponent className="h-6 w-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          {item.label}
-                        </p>
-                        <p className="text-muted-foreground">{item.value}</p>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="glass-card p-8 rounded-2xl">
-              <h3 className="text-xl font-bold text-foreground mb-6">
-                Connect with me
-              </h3>
-              <div className="flex gap-6 justify-between">
-                {socialLinks.map((social) => {
-                  const IconComponent = social.icon;
-                  return (
-                    <Button
-                      key={social.label}
-                      variant="ghost"
-                      onClick={() => window.open(social.href, "_blank")}
-                      className="flex items-center gap-2 p-3 h-auto rounded-xl hover:scale-105 transition-transform duration-300 group flex-1"
-                    >
-                      <IconComponent className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-                      <span className="text-foreground font-medium group-hover:text-primary transition-colors">
-                        {social.label}
-                      </span>
-                    </Button>
-                  );
-                })}
-              </div>
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-12">
+          <div className="flex min-h-0 flex-col justify-center text-left lg:h-full lg:pr-4">
+            <div>
+              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+                Get in <span className="text-accent-heading">Touch</span>
+              </h2>
+              <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
+                Let's collaborate on your next project or discuss opportunities in
+                tech and innovation
+              </p>
             </div>
           </div>
 
           {/* Contact Form */}
-          <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="glass-card p-8 rounded-2xl">
-              <h3 className="text-2xl font-bold text-foreground mb-6">
+          <div className="flex h-full min-h-0 flex-col">
+            <div className="glass-card flex h-full min-h-0 flex-col rounded-2xl border border-border/20 p-6 sm:p-8">
+              <h3 className="text-xl font-bold text-foreground sm:text-2xl">
                 Send me a message
               </h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">
+                I usually reply within a couple of days.
+              </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                onSubmit={handleSubmit}
+                className="mt-6 flex min-h-0 flex-1 flex-col gap-5 sm:gap-6"
+              >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name" className="text-foreground">
@@ -255,8 +176,8 @@ const ContactSection = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     placeholder="Tell me about your project or opportunity..."
-                    rows={6}
-                    className="bg-input border-border/50 focus:border-primary transition-colors resize-none"
+                    rows={5}
+                    className="min-h-[150px] bg-input border-border/50 focus:border-primary transition-colors resize-y sm:min-h-[168px]"
                     required
                   />
                 </div>
@@ -266,7 +187,7 @@ const ContactSection = () => {
                   variant="hero"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full group"
+                  className="mt-auto h-12 w-full text-base"
                 >
                   {isSubmitting ? (
                     <>
@@ -275,7 +196,7 @@ const ContactSection = () => {
                     </>
                   ) : (
                     <>
-                      <Send className="mr-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <Send className="mr-2 h-4 w-4" />
                       Send Message
                     </>
                   )}

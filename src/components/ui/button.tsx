@@ -10,17 +10,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-primary/90 btn-glow",
+          "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
           "border border-border bg-transparent text-foreground hover:bg-card hover:text-card-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 btn-glow",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost:
           "hover:bg-card hover:text-card-foreground transition-colors duration-300",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold btn-glow hover:from-primary/90 hover:to-secondary/90",
+        hero: "bg-primary text-primary-foreground font-semibold hover:bg-primary/90",
         glass:
           "glass-card text-foreground hover:bg-card-hover border border-card-border/50 backdrop-blur-xl",
         nav: "bg-nav-background/80 text-nav-foreground border border-nav-border/50 hover:bg-nav-background backdrop-blur-sm",

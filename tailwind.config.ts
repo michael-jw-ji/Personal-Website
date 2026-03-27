@@ -18,6 +18,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -86,36 +90,52 @@ export default {
 					to: { height: '0' }
 				},
 				'fade-in': {
-					'0%': { opacity: '0', transform: 'translateY(20px)' },
-					'100%': { opacity: '1', transform: 'translateY(0)' }
+					from: { opacity: '0' },
+					to: { opacity: '1' },
 				},
-				'slide-in': {
-					'0%': { opacity: '0', transform: 'translateX(-20px)' },
-					'100%': { opacity: '1', transform: 'translateX(0)' }
+				'fade-in-up': {
+					from: { opacity: '0', transform: 'translateY(20px)' },
+					to: { opacity: '1', transform: 'translateY(0)' },
 				},
-				'float': {
-					'0%, 100%': { transform: 'translateY(0px)' },
-					'50%': { transform: 'translateY(-10px)' }
+				'slide-in-left': {
+					from: { opacity: '0', transform: 'translateX(-16px)' },
+					to: { opacity: '1', transform: 'translateX(0)' },
 				},
-				'glow': {
-					'0%, 100%': { boxShadow: '0 0 20px hsl(var(--primary) / 0.2)' },
-					'50%': { boxShadow: '0 0 30px hsl(var(--primary) / 0.4)' }
+				'ambient-1': {
+					'0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+					'50%': { transform: 'translate(-4%, 6%) scale(1.06)' },
 				},
-				'carousel-rotate': {
-					'0%': { transform: 'rotateY(0deg)' },
-					'100%': { transform: 'rotateY(360deg)' }
-				}
+				'ambient-2': {
+					'0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+					'50%': { transform: 'translate(6%, -5%) scale(0.94)' },
+				},
+				'ambient-3': {
+					'0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+					'50%': { transform: 'translate(5%, 8%) scale(1.08)' },
+				},
+				'ambient-4': {
+					'0%, 100%': { transform: 'translate(0%, 0%) scale(1)' },
+					'50%': { transform: 'translate(-7%, -4%) scale(0.92)' },
+				},
+				'particle-drift': {
+					'0%, 100%': { transform: 'translate(0, 0)', opacity: '0.25' },
+					'25%': { transform: 'translate(12px, -18px)', opacity: '0.55' },
+					'50%': { transform: 'translate(-8px, 10px)', opacity: '0.35' },
+					'75%': { transform: 'translate(14px, 12px)', opacity: '0.5' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.6s ease-out',
-				'slide-in': 'slide-in 0.6s ease-out',
-				'float': 'float 3s ease-in-out infinite',
-				'glow': 'glow 2s ease-in-out infinite',
-				'carousel-rotate': 'carousel-rotate 20s linear infinite'
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'fade-in-up': 'fade-in-up 0.65s ease-out forwards',
+				'slide-in-left': 'slide-in-left 0.6s ease-out forwards',
+				'ambient-1': 'ambient-1 28s ease-in-out infinite',
+				'ambient-2': 'ambient-2 36s ease-in-out infinite',
+				'ambient-3': 'ambient-3 22s ease-in-out infinite',
+				'ambient-4': 'ambient-4 32s ease-in-out infinite',
+				'particle-drift': 'particle-drift 14s ease-in-out infinite',
 			},
-			// Removed conflicting transition properties to prevent Framer Motion conflicts
 		}
 	},
 	// plugins: [require("tailwindcss-animate")], // Temporarily disabled to prevent Framer Motion conflicts
