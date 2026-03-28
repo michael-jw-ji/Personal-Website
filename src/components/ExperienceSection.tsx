@@ -229,7 +229,7 @@ const ExperienceSection = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-4">
-            <span className="text-accent-heading">Experience</span>
+            My <span className="text-accent-heading">Experience</span>
           </h2>
         </div>
         {/* Vertical timeline: dates (left) → rail → card; newest at top */}
@@ -244,7 +244,8 @@ const ExperienceSection = () => {
             {experiences.map((exp) => (
               <li
                 key={exp.id}
-                className="relative flex flex-row items-stretch gap-2 sm:gap-4 pb-12 last:pb-0"
+                id={`experience-${exp.id}`}
+                className="relative flex flex-row items-stretch gap-2 scroll-mt-10 pb-12 last:pb-0 sm:gap-4"
               >
                 <div className="flex min-w-0 flex-[0_0_7.5rem] shrink-0 flex-col justify-center text-right sm:flex-[0_0_9.5rem]">
                   <time

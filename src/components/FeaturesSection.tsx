@@ -1,4 +1,14 @@
-import { Brain, Code, TrendingUp, Zap, Database, Cloud } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Brain,
+  Code,
+  TrendingUp,
+  Zap,
+  Database,
+  Cloud,
+  Layers,
+  Link2,
+} from "lucide-react";
 
 const accentStyles = [
   "bg-primary/10 border-primary/25 text-primary",
@@ -6,45 +16,87 @@ const accentStyles = [
   "bg-accent/10 border-accent/25 text-accent",
 ] as const;
 
+type ExpertiseEvidence = {
+  label: string;
+  href: string;
+};
+
+type ExpertiseFeature = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  /** Work on the site where this theme shows up (Experience + Projects). */
+  evidence: ExpertiseEvidence[];
+};
+
+const features: ExpertiseFeature[] = [
+  {
+    icon: Brain,
+    title: "Machine Learning",
+    description:
+      "Advanced ML algorithms, neural networks, and AI model development with PyTorch and TensorFlow",
+    evidence: [
+      { label: "Algoverse", href: "#experience-2" },
+      { label: "StockSenseAI", href: "#project-2" },
+      { label: "Stock Market Predictor", href: "#project-5" },
+    ],
+  },
+  {
+    icon: Code,
+    title: "Full-Stack Development",
+    description:
+      "Modern web applications using React, Node.js, TypeScript, and scalable backend architectures",
+    evidence: [
+      { label: "Atlas Trading View", href: "#project-6" },
+      { label: "Club Website", href: "#project-3" },
+      { label: "WhyAmIBroke", href: "#project-1" },
+    ],
+  },
+  {
+    icon: TrendingUp,
+    title: "Financial Technology",
+    description:
+      "Fintech solutions, algorithmic trading systems, and financial data analysis platforms",
+    evidence: [
+      { label: "Atlas Trading View", href: "#project-6" },
+      { label: "StockSenseAI", href: "#project-2" },
+    ],
+  },
+  {
+    icon: Database,
+    title: "Data Engineering",
+    description:
+      "ETL pipelines, data preprocessing, and big data solutions with PostgreSQL and cloud databases",
+    evidence: [
+      { label: "WhyAmIBroke", href: "#project-1" },
+      { label: "Mackenzie Health", href: "#experience-3" },
+    ],
+  },
+  {
+    icon: Cloud,
+    title: "Cloud Infrastructure",
+    description:
+      "AWS and Azure cloud solutions, containerization with Docker, and scalable deployments",
+    evidence: [
+      { label: "Rogers Communications", href: "#experience-1" },
+      { label: "Atlas Trading View", href: "#project-6" },
+      { label: "Mackenzie Health", href: "#experience-3" },
+    ],
+  },
+  {
+    icon: Zap,
+    title: "Performance Optimization",
+    description:
+      "System optimization, GPU utilization, and high-performance computing solutions",
+    evidence: [
+      { label: "Algoverse", href: "#experience-2" },
+      { label: "KC Badminton Club", href: "#experience-4" },
+      { label: "Atlas Trading View", href: "#project-6" },
+    ],
+  },
+];
+
 const FeaturesSection = () => {
-  const features = [
-    {
-      icon: Brain,
-      title: "Machine Learning",
-      description:
-        "Advanced ML algorithms, neural networks, and AI model development with PyTorch and TensorFlow",
-    },
-    {
-      icon: Code,
-      title: "Full-Stack Development",
-      description:
-        "Modern web applications using React, Node.js, TypeScript, and scalable backend architectures",
-    },
-    {
-      icon: TrendingUp,
-      title: "Financial Technology",
-      description:
-        "Fintech solutions, algorithmic trading systems, and financial data analysis platforms",
-    },
-    {
-      icon: Database,
-      title: "Data Engineering",
-      description:
-        "ETL pipelines, data preprocessing, and big data solutions with PostgreSQL and cloud databases",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Infrastructure",
-      description:
-        "AWS and Azure cloud solutions, containerization with Docker, and scalable deployments",
-    },
-    {
-      icon: Zap,
-      title: "Performance Optimization",
-      description:
-        "System optimization, GPU utilization, and high-performance computing solutions",
-    },
-  ];
 
   return (
     <section
@@ -86,6 +138,23 @@ const FeaturesSection = () => {
                 <p className="text-card-foreground/80 leading-relaxed">
                   {feature.description}
                 </p>
+                <div className="mt-5 border-t border-border/30 pt-4">
+                  <p className="mb-2 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                    <Link2 className="h-3.5 w-3.5" aria-hidden />
+                    Seen in
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {feature.evidence.map((item) => (
+                      <a
+                        key={`${feature.title}-${item.href}-${item.label}`}
+                        href={item.href}
+                        className="inline-flex max-w-full items-center rounded-md border border-primary/25 bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:border-primary/40 hover:bg-primary/10"
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -98,10 +167,10 @@ const FeaturesSection = () => {
               Technical Proficiency
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            <div className="grid grid-cols-1 gap-8 text-left md:grid-cols-2 xl:grid-cols-4">
               <div>
-                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                  <Code className="h-5 w-5 text-primary" />
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
+                  <Code className="h-5 w-5 shrink-0 text-primary" />
                   Programming Languages
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -109,6 +178,8 @@ const FeaturesSection = () => {
                     "Java",
                     "Python",
                     "C",
+                    "C++",
+                    "HTML/CSS",
                     "JavaScript",
                     "TypeScript",
                     "SQL",
@@ -116,7 +187,7 @@ const FeaturesSection = () => {
                   ].map((lang) => (
                     <span
                       key={lang}
-                      className="px-3 py-1 bg-muted/50 text-muted-foreground text-sm rounded-md border border-border/30"
+                      className="rounded-md border border-border/30 bg-muted/50 px-3 py-1 text-sm text-muted-foreground"
                     >
                       {lang}
                     </span>
@@ -125,23 +196,28 @@ const FeaturesSection = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                  <Database className="h-5 w-5 text-secondary" />
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
+                  <Layers className="h-5 w-5 shrink-0 text-secondary" />
                   Frameworks & Tools
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "React",
                     "Node.js",
-                    "Flask",
-                    "PyTorch",
-                    "TensorFlow",
-                    "Docker",
                     "Next.js",
+                    "Flask",
+                    "FastAPI",
+                    "Docker",
+                    "Bootstrap",
+                    "REST",
+                    "Linux",
+                    "Jupyter Notebook",
+                    "VS Code",
+                    "IntelliJ",
                   ].map((tool) => (
                     <span
                       key={tool}
-                      className="px-3 py-1 bg-muted/50 text-muted-foreground text-sm rounded-md border border-border/30"
+                      className="rounded-md border border-border/30 bg-muted/50 px-3 py-1 text-sm text-muted-foreground"
                     >
                       {tool}
                     </span>
@@ -150,24 +226,61 @@ const FeaturesSection = () => {
               </div>
 
               <div>
-                <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                  <Cloud className="h-5 w-5 text-accent" />
-                  Cloud & Databases
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
+                  <Cloud className="h-5 w-5 shrink-0 text-accent" />
+                  Cloud & Data
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {[
                     "AWS",
                     "Azure",
+                    "GCP",
                     "PostgreSQL",
+                    "MongoDB",
                     "Git",
+                    "GitHub",
+                    "Git Bash",
                     "RabbitMQ",
                     "CUDA",
                   ].map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 bg-muted/50 text-muted-foreground text-sm rounded-md border border-border/30"
+                      className="rounded-md border border-border/30 bg-muted/50 px-3 py-1 text-sm text-muted-foreground"
                     >
                       {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="mb-3 flex items-center gap-2 font-semibold text-foreground">
+                  <Brain className="h-5 w-5 shrink-0 text-primary" />
+                  ML, AI & Libraries
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "PyTorch",
+                    "TensorFlow",
+                    "Pandas",
+                    "NumPy",
+                    "Sci-Kit Learn",
+                    "Matplotlib",
+                    "Seaborn",
+                    "HuggingFace",
+                    "Transformers",
+                    "LangChain",
+                    "LangGraph",
+                    "Keras",
+                    "XGBoost",
+                    "OpenCV",
+                    "YOLO",
+                  ].map((lib) => (
+                    <span
+                      key={lib}
+                      className="rounded-md border border-border/30 bg-muted/50 px-3 py-1 text-sm text-muted-foreground"
+                    >
+                      {lib}
                     </span>
                   ))}
                 </div>

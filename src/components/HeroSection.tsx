@@ -10,8 +10,8 @@ const HeroSection = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 lg:items-stretch">
-          <div className="flex flex-col justify-center text-center lg:text-left">
-            <p className="mb-5 inline-flex items-center gap-2.5 self-center rounded-full border border-border/50 bg-card/50 px-4 py-1.5 text-sm font-medium text-muted-foreground animate-fade-in lg:self-start">
+          <div className="flex flex-col justify-center text-center">
+            <p className="mb-5 inline-flex items-center gap-2.5 self-center rounded-full border border-border/50 bg-card/50 px-4 py-1.5 text-sm font-medium text-muted-foreground animate-fade-in">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
@@ -23,12 +23,12 @@ const HeroSection = () => {
               Michael Ji
             </h1>
 
-            <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-10 leading-snug animate-fade-in-up animation-delay-200">
+            <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-snug animate-fade-in-up animation-delay-200">
               Full-stack developer and professional badminton player who builds ML
               systems and polished web products.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8 animate-fade-in-up animation-delay-300">
+            <div className="flex flex-wrap gap-4 justify-center mb-8 animate-fade-in-up animation-delay-300">
               <Button
                 variant="hero"
                 size="lg"
@@ -55,7 +55,7 @@ const HeroSection = () => {
               </Button>
             </div>
 
-            <div className="flex flex-wrap gap-6 justify-center lg:justify-start text-base animate-fade-in-up animation-delay-400">
+            <div className="flex flex-wrap gap-6 justify-center text-base animate-fade-in-up animation-delay-400">
               <a
                 href="mailto:michael.jw.ji@gmail.com"
                 className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"

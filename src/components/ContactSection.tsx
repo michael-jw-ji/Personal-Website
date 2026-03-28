@@ -92,22 +92,18 @@ const ContactSection = () => {
       className="py-20 bg-gradient-to-b from-card/10 to-transparent"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-stretch lg:gap-12">
-          <div className="flex min-h-0 flex-col justify-center text-left lg:h-full lg:pr-4">
-            <div>
-              <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-                Get in <span className="text-accent-heading">Touch</span>
-              </h2>
-              <p className="mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                Let's collaborate on your next project or discuss opportunities in
-                tech and innovation
-              </p>
-            </div>
-          </div>
+        <div className="mb-16 text-center">
+          <h2 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            Get in <span className="text-accent-heading">Touch</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            Let's collaborate on your next project or discuss opportunities in
+            tech and innovation
+          </p>
+        </div>
 
-          {/* Contact Form */}
-          <div className="flex h-full min-h-0 flex-col">
-            <div className="glass-card flex h-full min-h-0 flex-col rounded-2xl border border-border/20 p-6 sm:p-8">
+        <div className="mx-auto max-w-2xl">
+          <div className="glass-card flex h-full min-h-0 flex-col rounded-2xl border border-border/20 p-6 sm:p-8">
               <h3 className="text-xl font-bold text-foreground sm:text-2xl">
                 Send me a message
               </h3>
@@ -202,7 +198,6 @@ const ContactSection = () => {
                   )}
                 </Button>
               </form>
-            </div>
           </div>
         </div>
       </div>

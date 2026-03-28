@@ -184,11 +184,11 @@ const ProjectsSection = () => {
 
         {/* Featured flagship projects */}
         <div className="mb-20 space-y-12">
-          <div className="text-center lg:text-left">
+          <div className="text-center">
             <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">
               Featured
             </h3>
-            <p className="mt-2 text-muted-foreground">
+            <p className="mx-auto mt-2 max-w-2xl text-muted-foreground">
               Deeper dives into two builds with the strongest product and
               infrastructure scope
             </p>
@@ -197,7 +197,8 @@ const ProjectsSection = () => {
           {featuredProjects.map((project) => (
             <article
               key={project.id}
-              className="glass-card card-glow-hover overflow-hidden rounded-2xl border border-border/20"
+              id={`project-${project.id}`}
+              className="glass-card card-glow-hover scroll-mt-10 overflow-hidden rounded-2xl border border-border/20"
             >
               <div className="flex flex-col gap-8 p-6 lg:flex-row lg:items-stretch lg:gap-10 lg:p-10">
                 <div className="min-w-0 lg:w-[58%]">
@@ -256,11 +257,11 @@ const ProjectsSection = () => {
 
         {/* Compact grid */}
         <div>
-          <div className="mb-10 text-center lg:text-left">
+          <div className="mb-10 text-center">
             <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">
               More projects
             </h3>
-            <p className="mt-2 text-muted-foreground">
+            <p className="mx-auto mt-2 max-w-2xl text-muted-foreground">
               Smaller builds and tools: title, one-liner, and stack. Click for
               details.
             </p>
@@ -270,9 +271,10 @@ const ProjectsSection = () => {
             {moreProjects.map((project) => (
               <button
                 key={project.id}
+                id={`project-${project.id}`}
                 type="button"
                 onClick={() => openProject(project)}
-                className="glass-card card-glow-hover group flex h-full flex-col rounded-xl border border-border/20 p-5 text-left transition-colors hover:border-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="glass-card card-glow-hover group flex h-full scroll-mt-10 flex-col rounded-xl border border-border/20 p-5 text-left transition-colors hover:border-primary/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <h4 className="text-lg font-bold text-foreground group-hover:text-primary">
                   {project.title}
