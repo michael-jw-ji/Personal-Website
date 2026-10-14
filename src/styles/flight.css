@@ -1,0 +1,238 @@
+/* ---------------------------------------------------------------------------
+   The site. Scoped under `.flight`.
+
+   The world is plot furniture, not cards: axes carrying real units, hairline
+   rules at uneven intervals, dimension callouts with arrowheads, annotated
+   points on leader lines. Monospace holds every number and unit; prose is set
+   in the grotesk. Nothing is a rounded panel and nothing floats on a shadow.
+   --------------------------------------------------------------------------- */
+
+.flight {
+  /* Paper by default. Cool ground, so the warm accent stays the only
+     temperature on the page. Dark is the same drawing with the values
+     reversed; see [data-theme="dark"]. */
+  --ink: 220 20% 97%;
+  --ink-raised: 220 16% 94%;
+  --rule: 220 12% 86%;
+  --rule-strong: 220 8% 52%;
+
+  --line: 222 18% 11%;
+  --line-dim: 220 10% 28%;
+  --line-faint: 220 8% 36%;
+
+  /* Dark enough to be text on paper and a fill behind paper-colored type. */
+  --plot: 22 86% 36%;
+  --plot-soft: 22 78% 30%;
+
+  background-color: hsl(var(--ink));
+  color: hsl(var(--line));
+  color-scheme: light;
+  font-optical-sizing: auto;
+}
+
+.flight[data-theme="dark"] {
+  --ink: 222 14% 6%;
+  --ink-raised: 222 12% 9%;
+  --rule: 220 9% 20%;
+  --rule-strong: 220 10% 39%;
+
+  --line: 40 12% 94%;
+  --line-dim: 220 7% 62%;
+  --line-faint: 220 8% 54%;
+
+  --plot: 24 92% 58%;
+  --plot-soft: 24 88% 64%;
+
+  color-scheme: dark;
+}
+
+/* The browser surfaces nobody draws. These ship with defaults that belong to
+   no design system, and theming them is the cheapest proof a page was built
+   rather than assembled. */
+/* Matches --ink. Hard-coded because the token is scoped to .flight and this
+   has to reach `body`, which sits outside it. */
+html:has(.flight) body {
+  background: hsl(220 20% 97%);
+}
+html:has(.flight[data-theme="dark"]) body {
+  background: hsl(222 14% 6%);
+}
+
+/* The readout holds the top of the frame, so anything the browser scrolls to
+   lands underneath it. Without this, tabbing to a link just below the fold
+   parks the focus ring behind the header: it has focus and cannot be seen.
+   Covers the anchor case too, since both go through scroll padding. */
+html:has(.flight) {
+  scroll-padding-top: 4.5rem;
+}
+
+.flight ::selection {
+  background: hsl(var(--plot) / 0.28);
+  color: hsl(var(--line));
+}
+.flight {
+  caret-color: hsl(var(--plot));
+  scrollbar-color: hsl(var(--rule-strong)) transparent;
+  scrollbar-width: thin;
+}
+.flight ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.flight ::-webkit-scrollbar-track {
+  background: hsl(var(--ink));
+}
+.flight ::-webkit-scrollbar-thumb {
+  background: hsl(var(--rule-strong));
+  border: 3px solid hsl(var(--ink));
+  border-radius: 99px;
+}
+.flight ::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--line-faint));
+}
+.flight :focus-visible {
+  outline: 2px solid hsl(var(--plot));
+  outline-offset: 3px;
+}
+.flight a {
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: from-font;
+}
+
+/* No 300ms double-tap-zoom wait on any of the targets. The page has no
+   pinch-zoom affordance of its own, so nothing is lost by opting out. */
+.flight a,
+.flight button {
+  touch-action: manipulation;
+}
+
+/* Headings are the only type here allowed to rewrap for shape rather than for
+   fit. `balance` is capped at a few lines by spec, which is exactly the range
+   the headings occupy; prose gets `pretty`, which only kills the widow. */
+.flight h1,
+.flight h2,
+.flight h3 {
+  text-wrap: balance;
+}
+.flight p,
+.flight dd,
+.flight li {
+  text-wrap: pretty;
+}
+
+/* Every number on this page is tabular. Figures that jitter between widths
+   are the fastest way to make a data world look like a mockup of one. */
+.flight .num {
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+    monospace;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "zero" 1;
+  letter-spacing: 0.01em;
+}
+
+/* An annotation: the small uppercase monospace label that names a value.
+   Letterspaced wide, because at this size tight tracking turns to mush. */
+.flight .annot {
+  font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo,
+    monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: hsl(var(--line-faint));
+}
+
+/* The one annotation that names the subject rather than a value. */
+.flight .annot-strong {
+  color: hsl(var(--line));
+  font-weight: 500;
+}
+
+/* --- Plot furniture ------------------------------------------------------ */
+
+/* A measured rule. Uneven by design: a plot's gridlines sit where the data
+   needs them, and evenly spaced lines read as wallpaper. */
+.flight .rule-h {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--rule)) 0 38%,
+    hsl(var(--rule) / 0.35) 38% 61%,
+    hsl(var(--rule)) 61% 100%
+  );
+}
+
+/* A plotted datum: a small filled square marking a measured point. */
+.flight .datum {
+  width: 9px;
+  height: 9px;
+  background: hsl(var(--plot));
+}
+
+/* --- Entrance ------------------------------------------------------------ */
+
+/* A short cascade down the first viewport. Staggered by a custom property so
+   each element names its own place in the order rather than relying on
+   nth-child, which breaks the moment anything is reordered. */
+@keyframes flight-annot-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.flight .annot-in {
+  opacity: 0;
+}
+.flight[data-drawn="true"] .annot-in {
+  /* Duration and easing both come from SHUTTLE_MOTION, set inline on the
+     root so the curve cannot drift from the solution that produced it. */
+  animation: flight-annot-in 380ms var(--flight-ease, ease-out) forwards;
+  animation-delay: var(--in-delay, 0ms);
+}
+
+/* Reduced motion gets the finished page, everything already in place. */
+@media (prefers-reduced-motion: reduce) {
+  .flight .annot-in,
+  .flight[data-drawn="true"] .annot-in {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* --- Photo plates -------------------------------------------------------- */
+
+/* A slot waiting for a real photograph. It is drawn as a measured, labelled
+   plate rather than a grey box with an icon in it, so an unfilled site reads
+   as a plan rather than as a broken one. See docs/PHOTO-BRIEF.md. */
+.flight .plate {
+  position: relative;
+  background-color: hsl(var(--ink-raised));
+  background-image:
+    repeating-linear-gradient(
+      -45deg,
+      hsl(var(--line) / 0.035) 0 1px,
+      transparent 1px 9px
+    );
+  border: 1px solid hsl(var(--rule));
+}
+.flight .plate::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px dashed hsl(var(--rule-strong));
+  pointer-events: none;
+}
+
+/* A run of annotations read as one list rather than as loose words. The
+   separator is a pseudo-element so it never lands at the start of a wrapped
+   line and never needs a key, and it is dimmer than the words it divides:
+   a separator that competes with its terms stops separating them. */
+.flight .annot-list > *:not(:last-child)::after {
+  content: "·";
+  margin-left: 0.85rem;
+  color: hsl(var(--rule-strong));
+}

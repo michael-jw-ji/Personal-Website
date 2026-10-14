@@ -123,6 +123,17 @@ export default {
 					'50%': { transform: 'translate(-8px, 10px)', opacity: '0.35' },
 					'75%': { transform: 'translate(14px, 12px)', opacity: '0.5' },
 				},
+				/* A community card skimmed in from the dealer's side, then settling. */
+				'deal-in': {
+					from: {
+						opacity: '0',
+						transform: 'translate3d(-22%, -34%, 0) rotate(-13deg) scale(0.9)',
+					},
+					to: {
+						opacity: '1',
+						transform: 'translate3d(0, 0, 0) rotate(0deg) scale(1)',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -135,6 +146,7 @@ export default {
 				'ambient-3': 'ambient-3 22s ease-in-out infinite',
 				'ambient-4': 'ambient-4 32s ease-in-out infinite',
 				'particle-drift': 'particle-drift 14s ease-in-out infinite',
+				'deal-in': 'deal-in 0.62s cubic-bezier(0.2, 0.75, 0.3, 1) forwards',
 			},
 		}
 	},

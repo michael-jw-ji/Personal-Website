@@ -20,7 +20,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-card hover:text-card-foreground transition-colors duration-300",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-primary text-primary-foreground font-semibold hover:bg-primary/90",
+        hero: "bg-accent text-accent-foreground font-semibold hover:bg-accent/90",
         glass:
           "glass-card text-foreground hover:bg-card-hover border border-card-border/50 backdrop-blur-xl",
         nav: "bg-nav-background/80 text-nav-foreground border border-nav-border/50 hover:bg-nav-background backdrop-blur-sm",

@@ -2,113 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Michael Ji Portfolio Design System - Dark gradient theme with elegant accents */
+/* Michael Ji Portfolio — "Midnight & Chip Red" poker theme.
+   Structural model borrowed from Linear (references/awesome-design-md/design-md/linear.app):
+   near-black canvas, layered surfaces, hairline borders, and a SINGLE chromatic
+   accent that never appears decoratively. Here that accent is chip red; brass
+   gold is rarer still and reserved for winnings (the Pot). */
 
 @layer base {
   :root {
     --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
-    /* Background: near-neutral dark with a hint of violet (product-site feel) */
-    --background: 240 6% 8%;
+
+    /*
+      Dark = the table.
+        #0B0C0E midnight · #141619 felt panel · #C8102E chip red
+        #C8A96B brass (winnings only) · #EDE8DE bone
+    */
+
+    /* Canvas + layered surfaces */
+    --background: 220 12% 5%;
     --background-gradient: linear-gradient(
       180deg,
-      hsl(240 12% 5%) 0%,
-      hsl(260 25% 9%) 45%,
-      hsl(240 10% 7%) 100%
+      hsl(220 14% 4%) 0%,
+      hsl(215 12% 7%) 45%,
+      hsl(220 14% 4%) 100%
     );
-    --foreground: 0 0% 98%;
+    --foreground: 40 29% 90%;
 
-    /* Card styling with glass effect */
-    --card: 240 10% 12%;
-    --card-border: 240 15% 20%;
-    --card-foreground: 0 0% 95%;
-    --card-hover: 240 15% 18%;
+    --card: 218 12% 9%;
+    --card-border: 217 10% 16%;
+    --card-foreground: 40 22% 87%;
+    --card-hover: 214 12% 12%;
 
-    /* Navigation and UI elements */
-    --nav-background: 240 12% 10%;
-    --nav-foreground: 0 0% 95%;
-    --nav-border: 240 20% 25%;
+    --nav-background: 220 12% 6%;
+    --nav-foreground: 40 22% 88%;
+    --nav-border: 217 10% 16%;
 
-    /* Primary purple accent */
-    --primary: 260 75% 65%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 260 85% 75%;
+    /* THE accent — chip red. Used on intent, never for decoration. */
+    --primary: 350 85% 42%;
+    --primary-foreground: 40 40% 96%;
+    --primary-glow: 350 72% 55%;
 
-    /* Secondary pink accent */
-    --secondary: 320 60% 70%;
-    --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 320 70% 80%;
+    /* Brass — winnings only (awards, rare emphasis) */
+    --secondary: 40 46% 60%;
+    --secondary-foreground: 220 15% 7%;
+    --secondary-glow: 40 52% 72%;
 
-    /* Muted elements */
-    --muted: 240 10% 20%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 218 10% 13%;
+    --muted-foreground: 219 8% 58%;
 
-    /* Accent colors */
-    --accent: 180 65% 60%;
-    --accent-foreground: 0 0% 100%;
-    --accent-glow: 180 75% 70%;
+    /* Bone — primary CTA surface on dark */
+    --accent: 40 29% 92%;
+    --accent-foreground: 220 15% 7%;
+    --accent-glow: 40 35% 96%;
 
-    /* Status colors */
-    --destructive: 0 75% 60%;
+    --destructive: 0 62% 50%;
     --destructive-foreground: 0 0% 100%;
-    --success: 120 60% 50%;
-    --warning: 45 90% 60%;
+    --success: 152 42% 42%;
+    --warning: 40 70% 55%;
 
-    /* Interactive elements */
-    --border: 240 15% 25%;
-    --input: 240 12% 15%;
-    --ring: 260 75% 65%;
-    --hover-glow: 260 85% 75%;
+    --border: 217 10% 16%;
+    --input: 218 12% 10%;
+    --ring: 350 85% 48%;
+    --hover-glow: 350 72% 55%;
 
-    /* Spacing and effects */
     --radius: 0.75rem;
-    --shadow-elegant: 0 20px 40px -12px hsl(240 100% 4% / 0.6);
-    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
-    /* Removed transition-smooth to prevent conflicts with Framer Motion */
+    --shadow-elegant: 0 24px 48px -16px hsl(220 40% 1% / 0.8);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.2);
 
     --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-foreground: 220 15% 26%;
+    --sidebar-primary: 220 15% 8%;
+    --sidebar-primary-foreground: 40 40% 96%;
+    --sidebar-accent: 40 20% 94%;
+    --sidebar-accent-foreground: 220 15% 18%;
+    --sidebar-border: 38 14% 88%;
+    --sidebar-ring: 350 85% 42%;
   }
 
-  /* Light mode (optional - portfolio uses dark theme primarily) */
+  /* Light = the card face. Bone stock, ink type, same chip red. */
   .light {
-    --background: 0 0% 98%;
-    --background-gradient: linear-gradient(135deg, hsl(0, 0%, 98%) 0%, hsl(240, 20%, 95%) 100%);
-    --foreground: 240 10% 15%;
-    --card: 0 0% 100%;
-    --card-border: 240 15% 90%;
-    --card-foreground: 240 10% 15%;
-    /* Subtle grey hover on white cards (matches muted, avoids dark :root --card-hover) */
-    --card-hover: 240 5% 93%;
-    --primary: 260 75% 55%;
-    --secondary: 320 60% 60%;
-    --accent: 180 65% 50%;
-    --muted: 240 5% 92%;
-    --muted-foreground: 240 5% 45%;
-    --border: 240 15% 88%;
-    --input: 0 0% 100%;
-    --ring: 260 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 40 30% 95%;
+    --background-gradient: linear-gradient(
+      180deg,
+      hsl(40 34% 96%) 0%,
+      hsl(38 22% 93%) 50%,
+      hsl(40 30% 95%) 100%
+    );
+    --foreground: 220 15% 8%;
+
+    --card: 40 40% 98%;
+    --card-border: 38 15% 85%;
+    --card-foreground: 220 15% 11%;
+    --card-hover: 40 25% 93%;
+
+    --nav-background: 40 35% 97%;
+    --nav-foreground: 220 15% 11%;
+    --nav-border: 38 15% 86%;
+
+    --primary: 350 74% 39%;
+    --primary-foreground: 40 40% 97%;
+    --primary-glow: 350 64% 52%;
+
+    --secondary: 40 45% 42%;
+    --secondary-foreground: 40 40% 97%;
+    --secondary-glow: 40 48% 58%;
+
+    --muted: 40 20% 91%;
+    --muted-foreground: 220 10% 38%;
+
+    --accent: 220 15% 10%;
+    --accent-foreground: 40 35% 95%;
+    --accent-glow: 220 15% 20%;
+
+    --border: 38 15% 85%;
+    --input: 40 40% 99%;
+    --ring: 350 74% 44%;
+    --hover-glow: 350 64% 52%;
+
+    --shadow-elegant: 0 16px 36px -14px hsl(220 20% 20% / 0.16);
+    --shadow-glow: 0 0 28px hsl(var(--primary) / 0.16);
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 40 25% 92%;
+    --sidebar-primary: 350 74% 48%;
+    --sidebar-primary-foreground: 40 40% 97%;
+    --sidebar-accent: 220 12% 16%;
+    --sidebar-accent-foreground: 40 25% 92%;
+    --sidebar-border: 220 10% 20%;
+    --sidebar-ring: 350 74% 48%;
   }
 }
 
@@ -124,9 +146,34 @@
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   }
 
-  /* Smooth scrolling */
+  /* Smooth scrolling, except where it is unwelcome. Scroll-behavior is
+     motion like any other, and a jump-to-anchor that animates can trigger
+     vestibular symptoms. */
   html {
     scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  /* Headings break evenly instead of stranding a word; paragraphs avoid a
+     one-word last line. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Selected text takes the site's red rather than the browser's blue. */
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
   }
 
   /* Custom scrollbar */
@@ -154,12 +201,17 @@
     box-shadow: var(--shadow-elegant);
   }
 
-  /* Accent text: single hue, not a purple-to-pink gradient */
+  /* Accent word in section headings — the one place chip red carries type */
   .text-accent-heading {
     color: hsl(var(--primary));
   }
 
-  /* Subtle grid (developer-product landing pages) */
+  /* Brass variant — winnings only */
+  .text-brass-heading {
+    color: hsl(var(--secondary));
+  }
+
+  /* Subtle grid */
   .bg-site-grid {
     background-image:
       linear-gradient(hsl(var(--border) / 0.35) 1px, transparent 1px),
@@ -168,7 +220,6 @@
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 20%, transparent 75%);
   }
 
-  /* Finer secondary grid for depth */
   .bg-site-grid-fine {
     background-image:
       linear-gradient(hsl(var(--border) / 0.2) 1px, transparent 1px),
@@ -177,25 +228,82 @@
     mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 15%, transparent 72%);
   }
 
-  /* Card hover glow — lifted border + ambient shadow */
+  /* Felt weave — fine diagonal cross-hatch, the table surface */
+  .bg-felt {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        hsl(var(--foreground) / 0.014) 0 1px,
+        transparent 1px 3px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        hsl(var(--foreground) / 0.014) 0 1px,
+        transparent 1px 3px
+      );
+    background-size: 4px 4px;
+  }
+
   .card-glow-hover {
     transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
   .card-glow-hover:hover {
-    border-color: hsl(var(--primary) / 0.3) !important;
+    border-color: hsl(var(--primary) / 0.35) !important;
     box-shadow: 0 0 32px hsl(var(--primary) / 0.1), var(--shadow-elegant);
     transform: translateY(-3px);
   }
 
-  /* Gradient text for accent headings */
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Poker chip — dashed inner rim like a clay chip */
+  .chip-ring {
+    position: relative;
+    border-radius: 9999px;
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+  }
+  .chip-ring::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 9999px;
+    border: 1px dashed hsl(var(--primary) / 0.45);
   }
 
-  /* Animation delay utilities */
+  /* Playing-card corner index */
+  .card-index {
+    font-family: var(--font-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .suit-red {
+    color: hsl(var(--primary));
+  }
+  .suit-dark {
+    color: hsl(var(--foreground) / 0.62);
+  }
+
+  /* Hairline rule with a centered suit pip, for section breaks */
+  .rule-pip {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: hsl(var(--muted-foreground));
+  }
+  .rule-pip::before,
+  .rule-pip::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--border)),
+      transparent
+    );
+  }
+
   .animation-delay-100 { animation-delay: 100ms; }
   .animation-delay-200 { animation-delay: 200ms; }
   .animation-delay-300 { animation-delay: 300ms; }
@@ -203,7 +311,6 @@
   .animation-delay-500 { animation-delay: 500ms; }
   .animation-delay-600 { animation-delay: 600ms; }
 
-  /* Vertical sidebar nav: active pill on the left */
   .nav-active-indicator {
     position: relative;
   }
@@ -220,4 +327,2282 @@
     background: hsl(var(--primary));
   }
 
+  /* ---------------------------------------------------------------------
+     The board — CSS 3D community cards.
+
+     Deliberately CSS-only (transform + perspective on real DOM nodes) rather
+     than WebGL: it costs no bundle, keeps the card text selectable and
+     screen-reader legible, and stays smooth on a mid-range phone. The deal
+     animation and the hover tilt live on two nested elements so their
+     transforms never overwrite each other.
+     --------------------------------------------------------------------- */
+
+  /* Depth of the card 3D space, declared once and inherited. Each card owns
+     its own perspective (see .card-deal) rather than sharing one on the table:
+     the vanishing point then sits on the card being looked at, which is what
+     lets a single card be carried out of the row without the others skewing.
+     ExperienceSection reads this same number as CARD_PERSPECTIVE to aim the
+     pickup, so the two have to stay in step. */
+  .card-table {
+    --table-depth: 1100px;
+  }
+
+  /* Outer node: owns the deal-in transform, and establishes the 3D space the
+     two nodes below move in. Perspective applies to children only, so it has
+     to sit here for the travel and the turn to share one vanishing point. */
+  .card-deal {
+    opacity: 0;
+    perspective: var(--table-depth, 1100px);
+    perspective-origin: 50% 50%;
+  }
+
+  /* A card being held up has to clear the rest of the board. It stays below
+     the dialog overlay (z-50) so the panel still covers it on handoff. */
+  .card-deal[data-picked='true'] {
+    position: relative;
+    z-index: 40;
+  }
+
+  /* Travel node: carries the card off the board and holds it out toward the
+     viewer. Kept separate from the turn below because the two run on their
+     own clocks — the card is lifted clear first and only then rotates, the
+     way you would pick a card up before turning it over. --px/--py/--pz are
+     written inline by ExperienceSection from the card's measured rect. */
+  .card-pickup {
+    transform-style: preserve-3d;
+    transform: translate3d(var(--px, 0px), var(--py, 0px), var(--pz, 0px));
+    /* Setting it back down. */
+    transition: transform 280ms cubic-bezier(0.4, 0, 0.3, 1);
+  }
+  .card-deal[data-picked='true'] .card-pickup {
+    /* Same clock and the same curve as the turn above, so the card leaving
+       the board and the card rotating are one movement and not two. */
+    transition: transform 160ms cubic-bezier(0.42, 0, 1, 1);
+    will-change: transform;
+  }
+
+  /* A card held off the board is in front of the page, not resting on it, so
+     the frosted face would show the page straight through itself. Both faces
+     go solid for the lift — which also drops the backdrop filter at the one
+     moment there is the most movement to paint. Only the colour layer is
+     replaced, so .bg-felt keeps its weave. */
+  .card-deal[data-picked='true'] .card-face,
+  .card-deal[data-picked='true'] .card-back {
+    background-color: hsl(var(--card));
+    /* Belt and braces: the opaque colour above already hides the blur, so
+       this is only here to stop the compositor doing the work. */
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  /* Inner node: owns the cursor tilt. --rx/--ry are written by pointer
+     handlers on every frame, so no React re-render happens while tracking. */
+  .playing-card-3d {
+    --rx: 0deg;
+    --ry: 0deg;
+    --flip: 0deg;
+    --lift: 0px;
+    transform-style: preserve-3d;
+    transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--flip)))
+      translateZ(var(--lift));
+    /* Settling back to rest, and turning face-up again on the way back to
+       the board - paired with .card-pickup's 280ms return so the card stops
+       rotating and stops moving at the same moment. See [data-tilting] for
+       the cursor-tracking case. */
+    transition: transform 300ms cubic-bezier(0.2, 0.75, 0.3, 1);
+  }
+
+  /* While the cursor is actually on the card, track it near-instantly —
+     a long ease here reads as lag rather than weight. */
+  .playing-card-3d[data-tilting='true'] {
+    transition: transform 90ms linear;
+    will-change: transform;
+  }
+
+  /* The card turns a quarter, not a half. At 90deg it is exactly edge-on and
+     has no width at all, which is the one instant it can be swapped for the
+     panel without the swap being visible — so that is where it stops and the
+     panel carries the rotation the rest of the way. Turning the full 180deg
+     here would put a second object on screen at a second angle.
+
+     Eases in only: this is the first half of one movement, and the panel's
+     ease-out is the second half. Tilt is zeroed so it reads as one clean
+     rotation rather than a wobble. */
+  .playing-card-3d[data-flipped='true'] {
+    --flip: 90deg;
+    --rx: 0deg;
+    --ry: 0deg;
+    --lift: 0px;
+    transition: transform 160ms cubic-bezier(0.42, 0, 1, 1);
+    will-change: transform;
+  }
+
+  /* Dropped the instant the panel takes over. The card is edge-on and so is
+     the panel, so there is nothing to see go. */
+  .card-deal[data-gone='true'] {
+    visibility: hidden;
+  }
+
+  /* Two faces occupying the same space; each hides when turned away. */
+  .card-face,
+  .card-back {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .card-back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+  }
+
+  /* Touch: there is no cursor to track, so the tilt is meaningless there. */
+  @media (hover: none) {
+    .playing-card-3d {
+      --rx: 0deg !important;
+      --ry: 0deg !important;
+      --lift: 0px !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-deal {
+      opacity: 1;
+      animation: none !important;
+    }
+    .card-pickup,
+    .playing-card-3d {
+      transform: none !important;
+      transition: none;
+    }
+  }
+
+}
+
+/* ---------------------------------------------------------------------------
+   Hero table — pocket aces and chip stacks, dealt in on load.
+
+   Top level (outside @layer) on purpose: Tailwind drops @keyframes that no
+   utility class references, and these are referenced from plain CSS.
+
+   CSS 3D only. Two rules that matter for it to render correctly:
+   - Any element between a card's slot and its faces must keep
+     transform-style: preserve-3d, and must never animate opacity or set
+     overflow/filter — each of those flattens the 3D context and the card
+     back would show through as a mirrored face.
+   - Sizes are in em. The scene sets a font-size that is 1/20 of its width, so
+     the whole table scales with the portrait.
+   --------------------------------------------------------------------------- */
+
+.hero-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 40%;
+  /* The scene is for looking at: it takes no pointer input, so every touch
+     and click goes straight through to the page behind it. */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* The sway is written to --sx/--sy every frame; see HeroTable.tsx. */
+.hero-scene {
+  --sx: 0deg;
+  --sy: 0deg;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--sx)) rotateY(var(--sy));
+  transition: transform 450ms cubic-bezier(0.2, 0.75, 0.3, 1);
+}
+/* Updated every frame, so a transition would only make it lag. */
+.hero-scene[data-ambient="true"] {
+  transition: none;
+}
+
+/* The portrait swings up out of the depth of the table. */
+.hero-photo {
+  animation: hero-photo-in 1.1s cubic-bezier(0.2, 0.75, 0.3, 1) 0.1s both;
+}
+/* The chip ring's dashed rim turns slowly, like a chip being spun. */
+.hero-photo.chip-ring::before {
+  animation: hero-ring-spin 80s linear infinite;
+}
+
+@keyframes hero-photo-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 7%, -280px) rotateX(14deg) rotateY(-26deg)
+      scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Cards -------------------------------------------------------------- */
+
+.hero-card-slot {
+  /* Not --sx/--sy: the scene already uses those for its tilt, they inherit, and
+     translateX(<angle>) is invalid, which silently drops the whole transform. */
+  --rot: var(--rest-rot, 0deg);
+  position: absolute;
+  width: 5.6em;
+  height: 7.84em;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--z, 70px)) translateX(var(--card-dx, 0em))
+    rotate(var(--rot));
+  transform-origin: 50% 92%;
+  transition: transform 520ms cubic-bezier(0.2, 0.85, 0.3, 1);
+}
+
+/* Every few seconds the hand of aces fans open, then closes again. */
+.hero-scene[data-fan="true"] .hero-card-slot {
+  --card-dx: var(--fan-x);
+  --rot: var(--fan-rot);
+}
+
+/* Click an ace and it turns over; the overshoot makes it land like a card. */
+.hero-card-flip {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 750ms cubic-bezier(0.3, 1.3, 0.5, 1);
+}
+.hero-card-slot[data-flipped="true"] .hero-card-flip {
+  transform: rotateY(180deg);
+}
+
+/* Soft contact shadow the hand throws on the table. */
+.hero-hand-shadow {
+  position: absolute;
+  left: -24%;
+  bottom: -15%;
+  width: 62%;
+  height: 14%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    hsl(0 0% 0% / 0.75),
+    transparent 70%
+  );
+  filter: blur(0.5em);
+  transform: translateZ(-30px);
+  pointer-events: none;
+  animation: hero-floor-in 1.2s ease-out 1.2s both;
+}
+
+.hero-card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5em;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* A lit top lip and a hairline edge, a red rim-light spilling from the neon
+     ring on the left, and a heavy contact shadow. */
+  box-shadow:
+    inset 0 0.06em 0 hsl(0 0% 100% / 0.07),
+    inset 0 0 0 0.5px hsl(0 0% 100% / 0.12),
+    0 0 0 1px hsl(0 0% 0% / 0.6),
+    -0.15em 0 0.9em -0.25em hsl(var(--primary) / 0.5),
+    0 0.8em 1.6em -0.5em hsl(0 0% 0% / 0.85);
+}
+
+/* Matte black stock: paper grain over a soft top-left sheen and a faint woven
+   texture. Lettering is stamped foil, brighter at its centre than its edges.
+   Fixed colours, so the cards read the same in the light theme. */
+.hero-card-front {
+  --foil: hsl(350 92% 54%);
+  --foil-hi: hsl(350 100% 72%);
+  --foil-lo: hsl(350 90% 36%);
+  --foil-glow: hsl(350 92% 50% / 0.55);
+  color: var(--foil);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, hsl(0 0% 100% / 0.022) 0 1px, transparent 1px 3px),
+    radial-gradient(
+      130% 95% at 25% 8%,
+      hsl(220 8% 17%),
+      hsl(220 12% 7%) 62%,
+      hsl(220 14% 4%)
+    );
+}
+.hero-card-front[data-foil="silver"] {
+  --foil: hsl(40 12% 80%);
+  --foil-hi: hsl(40 25% 96%);
+  --foil-lo: hsl(40 6% 50%);
+  --foil-glow: hsl(40 15% 90% / 0.28);
+}
+/* A whisper of an inner frame, like the border foil on premium decks. */
+.hero-card-front::after {
+  content: "";
+  position: absolute;
+  inset: 0.34em;
+  border-radius: 0.3em;
+  border: 0.04em solid var(--foil);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.hero-card-back {
+  transform: rotateY(180deg);
+  box-sizing: border-box;
+  border: 0.3em solid hsl(220 10% 9%);
+  background-color: hsl(220 12% 6%);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .14 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(
+      45deg,
+      hsl(350 90% 50% / 0.16) 0 0.1em,
+      transparent 0.1em 0.38em
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      hsl(350 90% 50% / 0.16) 0 0.1em,
+      transparent 0.1em 0.38em
+    );
+  box-shadow:
+    inset 0 0 0 0.05em hsl(var(--primary) / 0.7),
+    -0.15em 0 0.9em -0.25em hsl(var(--primary) / 0.5),
+    0 0.8em 1.6em -0.5em hsl(0 0% 0% / 0.85);
+}
+
+/* Stamped foil: a gradient clipped to the glyphs, with the glow as a drop
+   shadow (text-shadow would show through the clipped, transparent fill). */
+.hero-card-index,
+.hero-card-pip,
+.hero-card-pips > span {
+  color: transparent;
+  background: linear-gradient(
+    145deg,
+    var(--foil-hi),
+    var(--foil) 42%,
+    var(--foil-lo) 72%,
+    var(--foil-hi)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 0.3em var(--foil-glow));
+}
+
+.hero-card-index {
+  position: absolute;
+  left: 0.5em;
+  top: 0.45em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1;
+}
+.hero-card-index-suit {
+  margin-top: 0.12em;
+  font-size: 0.8em;
+}
+.hero-card-index-end {
+  left: auto;
+  top: auto;
+  right: 0.5em;
+  bottom: 0.45em;
+  transform: rotate(180deg);
+}
+
+.hero-card-pip {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 3.6em;
+  line-height: 1;
+}
+
+/* A number card: its pips in a column, the lower ones turned over. */
+.hero-card-pips {
+  position: absolute;
+  inset: 0;
+}
+.hero-card-pips > span {
+  position: absolute;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+.hero-card-pips > span[data-flip="true"] {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+/* A court card: the figure twice in a framed panel, the second turned over. */
+.hero-card-court {
+  position: absolute;
+  inset: 20%;
+  display: block;
+}
+.hero-card-court::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 0.05em solid var(--foil);
+  opacity: 0.5;
+}
+.hero-card-court svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  filter: drop-shadow(0 0 0.25em var(--foil-glow));
+}
+.hero-card-court svg[data-end="1"] {
+  top: 50%;
+  transform: rotate(180deg);
+}
+.court-foil {
+  fill: var(--foil);
+}
+.court-foilLine {
+  fill: none;
+  stroke: var(--foil);
+  stroke-linecap: round;
+}
+.court-ink {
+  fill: hsl(220 14% 5%);
+}
+.court-inkLine {
+  fill: none;
+  stroke: hsl(220 14% 5%);
+  stroke-linecap: round;
+}
+
+/* --- Chips -------------------------------------------------------------- */
+
+/* Loose casino chips seen face-on: a coloured rim cut by eight white notches,
+   an inner white disc with a dashed ring, and one big suit. 1em is the chip's
+   diameter (the slot sets font-size), so every measurement below is a fraction
+   of the chip. Layers, back to front: rim (this element, notches via a
+   repeating conic gradient) > colour ring (::before) > white core > pips. */
+.hero-chip-slot {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--z, 100px)) rotateX(var(--tx, 0deg))
+    rotateY(var(--ty, 0deg)) rotateZ(var(--tz, 0deg));
+}
+
+.hero-chip-float,
+.hero-chip-drop {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Idle: the chip sways on its vertical axis as though resting on the felt. */
+.hero-chip-float {
+  animation: hero-chip-float var(--float-dur, 6s) ease-in-out
+    var(--float-delay, 3s) infinite alternate;
+}
+
+/* Toss: tumbles in from above, lands, and wobbles to rest. */
+.hero-chip-drop {
+  animation: hero-chip-drop 1.05s both;
+  animation-delay: var(--delay, 1.4s);
+}
+
+.hero-chip {
+  --chip-notch: hsl(40 30% 95%);
+  --chip-core: hsl(40 30% 95%);
+  --chip-dash: hsl(220 8% 55%);
+  --chip-suit: var(--chip);
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from -11.25deg,
+    var(--chip-notch) 0deg 22.5deg,
+    var(--chip) 22.5deg 45deg
+  );
+  box-shadow:
+    0 0 0 0.02em hsl(0 0% 0% / 0.3),
+    0 0.06em 0 hsl(0 0% 0% / 0.35),
+    0 0.14em 0.3em hsl(0 0% 0% / 0.5);
+}
+.hero-chip[data-red="true"] {
+  --chip: hsl(var(--primary));
+}
+/* Black chips take the reference's look: near-black body, red-foil notches,
+   dark core, and a faint red glow. */
+.hero-chip[data-red="false"] {
+  --chip: hsl(220 10% 9%);
+  --chip-notch: hsl(var(--primary));
+  --chip-core: hsl(220 12% 7%);
+  --chip-dash: hsl(350 80% 48% / 0.7);
+  --chip-suit: hsl(350 92% 56%);
+  box-shadow:
+    0 0 0 0.02em hsl(0 0% 100% / 0.08),
+    0 0.06em 0 hsl(0 0% 0% / 0.5),
+    0 0.14em 0.3em hsl(0 0% 0% / 0.55),
+    0 0 0.7em hsl(var(--primary) / 0.3);
+}
+.hero-chip[data-red="false"] .hero-chip-suit {
+  text-shadow: 0 0 0.35em hsl(350 92% 52% / 0.65);
+}
+
+/* Solid ring that closes the inner end of each notch. */
+.hero-chip::before {
+  content: "";
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: var(--chip);
+  box-shadow: 0 0 0 0.015em hsl(0 0% 100% / 0.18);
+}
+
+.hero-chip-core {
+  position: absolute;
+  inset: 20%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--chip-core);
+  color: var(--chip-suit);
+}
+.hero-chip-core::before {
+  content: "";
+  position: absolute;
+  inset: 7%;
+  border-radius: 50%;
+  border: 0.018em dashed var(--chip-dash);
+}
+.hero-chip-suit {
+  font-size: 0.4em;
+  line-height: 1;
+}
+
+/* Tiny suit in each notch, turned so its base faces the centre. */
+.hero-chip-pip {
+  position: absolute;
+  inset: 0;
+  transform: rotate(var(--a));
+  color: var(--chip);
+}
+.hero-chip-pip > span {
+  position: absolute;
+  top: 0.012em;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.115em;
+  line-height: 1;
+}
+
+/* A face on each side, a ridged rim between them. */
+.chip3d {
+  --chip-notch: hsl(40 30% 95%);
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+.chip3d[data-red="true"] {
+  --chip: hsl(var(--primary));
+}
+.chip3d[data-red="false"] {
+  --chip: hsl(220 10% 9%);
+  --chip-notch: hsl(var(--primary));
+}
+
+/* Faces sit a hair outside the rim and a hair short of a neighbour's face, so
+   chips stacked at 0.1em never share a plane (which flickers in 3D). */
+.chip3d-front,
+.chip3d-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.chip3d-front {
+  transform: translateZ(0.048em);
+}
+.chip3d-back {
+  transform: rotateY(180deg) translateZ(0.048em);
+}
+
+/* Rim: thin rings laid one behind another. From any angle they read as the
+   notched edge of a solid chip. They are rings, not discs, on purpose: a full
+   disc sits within a hair of the face in depth, and when the browser orders the
+   two wrongly its notch pattern paints across the face as a pinwheel. A ring
+   can only ever overlap the face's own rim, which looks identical. */
+.chip3d-slice {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  -webkit-mask: radial-gradient(circle closest-side, transparent 86%, #000 88%);
+  mask: radial-gradient(circle closest-side, transparent 86%, #000 88%);
+  transform: translateZ(calc((var(--k) / 5 - 0.5) * 0.092em));
+  background:
+    linear-gradient(hsl(0 0% 0% / 0.3), hsl(0 0% 0% / 0.3)),
+    repeating-conic-gradient(
+      from -11.25deg,
+      var(--chip-notch) 0deg 22.5deg,
+      var(--chip) 22.5deg 45deg
+    );
+}
+
+/* Moulded plastic: a highlight near the top-left and a shade at the far edge,
+   fixed to the chip, plus a bevel where the core meets the ring. */
+.hero-chip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 28% 22%, hsl(0 0% 100% / 0.24), transparent 42%),
+    radial-gradient(circle at 72% 82%, hsl(0 0% 0% / 0.28), transparent 55%);
+}
+.hero-chip-core {
+  box-shadow:
+    inset 0 0.03em 0.07em hsl(0 0% 0% / 0.45),
+    0 0 0 0.02em hsl(0 0% 100% / 0.28);
+}
+
+/* Every few seconds a loose chip hops, flips once, and lands again. The
+   cycle is 8s with the hop in the first tenth of it, and each chip starts at
+   its own offset so they don't all jump together. */
+.hero-chip-hop {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: hero-chip-hop 8s cubic-bezier(0.3, 0.7, 0.4, 1)
+    calc(var(--float-delay, 0s) + 3.5s) infinite;
+}
+@keyframes hero-chip-hop {
+  0% {
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg);
+  }
+  4% {
+    transform: translate3d(0, -0.3em, 1.2em) rotateY(200deg) rotateX(14deg);
+  }
+  10%,
+  100% {
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateX(0deg);
+  }
+}
+
+/* Some chips turn all the way round on their axis instead of swaying. */
+.hero-chip-slot[data-spin="true"] .hero-chip-float {
+  animation-name: hero-chip-spin;
+  animation-timing-function: linear;
+  animation-direction: normal;
+}
+@keyframes hero-chip-spin {
+  from {
+    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(6deg);
+  }
+  50% {
+    transform: translate3d(0, -0.14em, 0.3em) rotateY(180deg) rotateX(-6deg);
+  }
+  to {
+    transform: translate3d(0, 0, 0) rotateY(360deg) rotateX(6deg);
+  }
+}
+
+@keyframes hero-chip-drop {
+  0% {
+    visibility: hidden;
+    transform: translate3d(0, -9em, 240px) rotateX(540deg) rotateY(300deg)
+      rotateZ(-40deg);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  }
+  58% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  74% {
+    transform: translate3d(0, -0.22em, 0) rotateX(-14deg) rotateY(7deg)
+      rotateZ(0deg);
+    animation-timing-function: ease-in-out;
+  }
+  88% {
+    transform: translate3d(0, 0, 0) rotateX(5deg) rotateY(-3deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+@keyframes hero-chip-float {
+  from {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(-14deg);
+  }
+  to {
+    transform: translate3d(0, -0.14em, 0.3em) rotateX(8deg) rotateY(14deg);
+  }
+}
+
+/* --- Neon ring and floor -------------------------------------------------- */
+
+/* A big red neon circle set behind the portrait and pushed off-centre toward
+   the lower left, so the portrait hides part of it and only a sweeping arc
+   reads, as in the reference. Sits back in depth, so cursor tilt parallaxes it
+   against the portrait. */
+.hero-neon {
+  position: absolute;
+  left: -30%;
+  top: -3%;
+  width: 130%;
+  height: 130%;
+  border-radius: 50%;
+  border: 0.16em solid hsl(350 96% 60%);
+  box-shadow:
+    0 0 0.5em hsl(var(--primary) / 0.95),
+    0 0 2.2em hsl(var(--primary) / 0.55),
+    inset 0 0 1.6em hsl(var(--primary) / 0.4);
+  transform: translateZ(-90px);
+  pointer-events: none;
+  animation:
+    hero-neon-ignite 1.6s linear 0.15s both,
+    hero-neon-pulse 5.5s ease-in-out 2s infinite;
+}
+
+/* A tube sign catching: two false starts, then it holds. */
+@keyframes hero-neon-ignite {
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  12% {
+    opacity: 0.08;
+  }
+  21% {
+    opacity: 0.9;
+  }
+  26% {
+    opacity: 0.15;
+  }
+  42%,
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Once lit, the tube breathes. */
+@keyframes hero-neon-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0.5em hsl(var(--primary) / 0.95),
+      0 0 2.2em hsl(var(--primary) / 0.55),
+      inset 0 0 1.6em hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow:
+      0 0 0.7em hsl(var(--primary) / 1),
+      0 0 3.2em hsl(var(--primary) / 0.75),
+      inset 0 0 2.2em hsl(var(--primary) / 0.55);
+  }
+}
+
+/* Red light pooling on a dark, glossy tabletop under the whole scene. */
+.hero-floor {
+  position: absolute;
+  left: -25%;
+  right: -8%;
+  bottom: -24%;
+  height: 34%;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    hsl(var(--primary) / 0.55),
+    hsl(var(--primary) / 0.16) 48%,
+    transparent 72%
+  );
+  filter: blur(0.7em);
+  transform: translateZ(-50px);
+  pointer-events: none;
+  animation: hero-floor-in 1.6s ease-out 0.6s both;
+}
+@keyframes hero-floor-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* --- Chip stacks ----------------------------------------------------------- */
+
+/* A pile of chips as a real 3D object. The plane is tipped toward the viewer
+   and every chip is a thick disc (see .chip3d) set along the plane's normal, so
+   the pile has a true ridged side, a top that shows its suit, and it stays
+   correct as the table orbits. Clicking adds a chip, which falls in. */
+.hero-stack3d {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  transform-style: preserve-3d;
+  transform: translateZ(var(--z, 100px));
+}
+
+.hero-stack-plane {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(62deg);
+}
+
+.hero-stack-item {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: hero-stack-drop3d 0.95s both;
+  animation-delay: var(--delay, 1.3s);
+}
+.hero-stack-rest {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--i) * 0.1em));
+}
+
+/* Contact shadow on the table under the pile. */
+.hero-stack-shadow {
+  position: absolute;
+  inset: -14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(0 0% 0% / 0.8), transparent 68%);
+  filter: blur(0.08em);
+  transform: translateZ(-0.03em);
+  pointer-events: none;
+}
+
+/* Tumbles down from well above the table, lands, and settles with a bounce.
+   Axes are the plane's own: +Z is up, so translateZ(8em) is height above the
+   pile. */
+@keyframes hero-stack-drop3d {
+  0% {
+    visibility: hidden;
+    transform: translateZ(8em) rotateX(300deg) rotateY(200deg);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.6);
+  }
+  58% {
+    visibility: visible;
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+    animation-timing-function: ease-out;
+  }
+  74% {
+    transform: translateZ(0.18em) rotateX(-8deg) rotateY(4deg);
+    animation-timing-function: ease-in-out;
+  }
+  88% {
+    transform: translateZ(0) rotateX(3deg) rotateY(-2deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    visibility: visible;
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* --- Embers ---------------------------------------------------------------- */
+
+/* Sparks lifting off the neon ring. Depth is set with the standalone
+   `translate` property so it composes with the animated transform. */
+.hero-ember {
+  position: absolute;
+  width: var(--size, 0.2em);
+  height: var(--size, 0.2em);
+  border-radius: 50%;
+  background: hsl(350 98% 64%);
+  box-shadow: 0 0 0.6em 0.1em hsl(350 95% 55% / 0.8);
+  translate: 0 0 var(--z, 0px);
+  opacity: 0;
+  pointer-events: none;
+  animation: hero-ember var(--dur, 8s) linear var(--delay, 0s) infinite;
+}
+@keyframes hero-ember {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--dx, 0), -11em) scale(0.35);
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: show the finished table, face-up and settled, with no
+   camera movement, no sparks, and no springing. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-scene {
+    transform: none !important;
+    transition: none;
+  }
+  .hero-photo,
+  .hero-photo.chip-ring::before,
+  .hero-card-deal,
+  .hero-card-float,
+  .hero-chip-drop,
+  .hero-chip-float,
+  .hero-chip-hop,
+  .hero-neon,
+  .hero-floor,
+  .hero-hand-shadow,
+  .hero-stack-item {
+    animation: none !important;
+    visibility: visible;
+  }
+  .hero-card-slot,
+  .hero-card-flip {
+    transition: none;
+  }
+  .hero-ember {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Card -> panel. One movement, handed between two objects halfway through.
+
+   The card turns to 90deg and stops. At 90deg it is edge-on: a vertical line
+   with no width and its full height. The panel starts as exactly that line,
+   in the same place, and unfolds out of it to full size while travelling to
+   the middle of the screen. The card is dropped on the same frame the panel
+   appears, so there is never more than one object on screen.
+
+   The panel itself does NOT rotate, and that is deliberate. It is nearly a
+   thousand pixels wide, and a plane that size held near 90deg to the viewer
+   produces violent perspective: the near edge renders many times larger than
+   the far one, and the result reads as a creased, skewed sheet rather than a
+   page. Growing the width from a sliver gives the same read -- something
+   edge-on opening out toward you -- with no projection to go wrong. The card
+   is small enough to rotate honestly; the page is not.
+
+   --from-scale-x is the width of that opening sliver, a couple of real
+   pixels, and --from-scale-y matches the card's height at the moment it
+   hands over. DetailModal solves both against its own laid-out box, since
+   the panel's size is only knowable once it is mounted.
+
+   Nothing here touches opacity. The panel is solid from its first frame, so
+   it reads as the card itself opening out rather than as a sheet of glass
+   fading in over the top of it. tailwindcss-animate is disabled in this
+   project, so shadcn's zoom/slide utilities are inert and nothing competes.
+   --------------------------------------------------------------------------- */
+@keyframes dialog-from-card {
+  from {
+    transform: translate(-50%, -50%)
+      translate(var(--from-x, 0px), var(--from-y, 0px))
+      scale(var(--from-scale-x, 0.004), var(--from-scale-y, 0.5));
+  }
+  to {
+    transform: translate(-50%, -50%) translate(0px, 0px) scale(1, 1);
+  }
+}
+
+@keyframes dialog-to-card {
+  from {
+    transform: translate(-50%, -50%) translate(0px, 0px) scale(1, 1);
+  }
+  to {
+    transform: translate(-50%, -50%)
+      translate(var(--from-x, 0px), var(--from-y, 0px))
+      scale(var(--from-scale-x, 0.004), var(--from-scale-y, 0.5));
+  }
+}
+
+.dialog-from-card[data-state='open'] {
+  animation: dialog-from-card 330ms cubic-bezier(0, 0, 0.28, 1);
+  transform-origin: 50% 50%;
+}
+
+/* Radix Presence keeps the node mounted until this animation finishes. */
+.dialog-from-card[data-state='closed'] {
+  animation: dialog-to-card 260ms cubic-bezier(0.45, 0, 0.9, 1);
+  transform-origin: 50% 50%;
+}
+
+/* The panel's own contents, which are not part of the morph: the shell
+   changes shape while the text crossfades in over it, so no one ever sees a
+   paragraph being stretched out of a card-shaped box. The corner indices are
+   excluded — rank and suit are the one thing the card and the page share, so
+   they stay solid the whole way through and carry the connection.
+
+   No delay: the fade starts the instant the panel does and is over well
+   before the shape has finished settling. */
+@keyframes dialog-reveal {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog-from-card[data-state='open'] > *:not(.card-index) {
+  animation: dialog-reveal 140ms ease-out;
+}
+
+/* Going the other way the contents have to leave BEFORE the panel gets thin.
+   A page of near-white text squashed into a two-pixel column averages out to
+   a bright vertical bar - the panel stops looking like a panel and flashes as
+   a thin white rectangle on its last few frames. Fading the text out early
+   leaves only the dark panel background to collapse.
+
+   `forwards` is load-bearing: without it the contents snap back to full
+   opacity for the rest of the collapse, which is the whole bug again. */
+.dialog-from-card[data-state='closed'] > *:not(.card-index) {
+  animation: dialog-reveal 120ms ease-in reverse forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-from-card[data-state='open'],
+  .dialog-from-card[data-state='closed'],
+  .dialog-from-card[data-state='open'] > *:not(.card-index),
+  .dialog-from-card[data-state='closed'] > *:not(.card-index) {
+    animation: none;
+  }
+}
+
+/* The scrim behind any dialog. It arrives mid-movement on the card handoff,
+   so it has to come up rather than cut — a hard slam to black reads as a
+   second, competing event. */
+@keyframes scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog-scrim[data-state='open'] {
+  animation: scrim-in 260ms ease-out;
+}
+
+.dialog-scrim[data-state='closed'] {
+  animation: scrim-in 240ms ease-in reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-scrim[data-state='open'],
+  .dialog-scrim[data-state='closed'] {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Featured project cards — black-foil playing cards, dealt in on scroll.
+
+   Top level (outside @layer) so Tailwind keeps the @keyframes. Same 3D rules
+   as the hero table: every layer between the tilt and the faces keeps
+   transform-style: preserve-3d, and the faces are solid, with no
+   backdrop-filter, overflow or opacity, any of which would flatten the flip.
+   --------------------------------------------------------------------------- */
+
+.project-table {
+  perspective: 1800px;
+  perspective-origin: 50% 30%;
+}
+
+/* Cursor tilt, written to --rx/--ry by FeaturedProjectCard. */
+.project-tilt {
+  --rx: 0deg;
+  --ry: 0deg;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 420ms cubic-bezier(0.2, 0.75, 0.3, 1);
+}
+.project-tilt[data-tilting="true"] {
+  transition: transform 90ms linear;
+  will-change: transform;
+}
+
+/* The deal: waits face-down and unseen until the card scrolls into view. */
+.project-flip {
+  position: relative;
+  display: block;
+  transform-style: preserve-3d;
+  visibility: hidden;
+}
+.project-table[data-dealt="true"] .project-flip {
+  animation: project-deal 1.15s cubic-bezier(0.2, 0.8, 0.25, 1)
+    var(--deal-delay, 0ms) both;
+}
+
+@keyframes project-deal {
+  0% {
+    visibility: hidden;
+    transform: translate3d(0, 9%, -260px) rotateX(-180deg) rotateZ(-2.5deg)
+      scale(0.94);
+  }
+  100% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateZ(0deg) scale(1);
+  }
+}
+
+.project-face {
+  border-radius: 1rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front: matte black stock with a faint woven grain, red rim-light on the
+   left, and its own dark palette, so the bone text, borders and buttons inside
+   stay correct even when the site is in light mode. */
+.project-face-front {
+  --background: 220 12% 5%;
+  --foreground: 40 29% 90%;
+  --card-foreground: 40 22% 87%;
+  --muted: 218 10% 13%;
+  --muted-foreground: 219 8% 58%;
+  --accent: 40 29% 92%;
+  --accent-foreground: 220 15% 7%;
+  --border: 217 10% 22%;
+  --input: 218 12% 10%;
+  --ring: 350 85% 48%;
+  --primary: 350 85% 42%;
+  --primary-foreground: 40 40% 96%;
+  position: relative;
+  color: hsl(var(--foreground));
+  background:
+    repeating-linear-gradient(45deg, hsl(0 0% 100% / 0.02) 0 1px, transparent 1px 3px),
+    radial-gradient(
+      120% 90% at 18% 0%,
+      hsl(220 8% 15%),
+      hsl(220 12% 7%) 60%,
+      hsl(220 14% 4%)
+    );
+  box-shadow:
+    0 0 0 1px hsl(0 0% 100% / 0.07),
+    -0.5rem 0 2.2rem -0.9rem hsl(var(--primary) / 0.5),
+    0 1.4rem 2.6rem -1rem hsl(0 0% 0% / 0.9);
+  transition: box-shadow 300ms ease;
+}
+.project-tilt[data-tilting="true"] .project-face-front {
+  box-shadow:
+    0 0 0 1px hsl(var(--primary) / 0.25),
+    -0.6rem 0 2.8rem -0.8rem hsl(var(--primary) / 0.7),
+    0 1.8rem 3rem -1rem hsl(0 0% 0% / 0.95);
+}
+/* A whisper of an inner frame, like the border foil on premium decks. */
+.project-face-front::after {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border-radius: 0.7rem;
+  border: 1px solid hsl(var(--primary) / 0.14);
+  pointer-events: none;
+}
+
+/* Back: the lattice from the hero cards, with a big foil suit. */
+.project-face-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateX(180deg);
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  border: 0.7rem solid hsl(220 10% 9%);
+  background-color: hsl(220 12% 6%);
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      hsl(350 90% 50% / 0.16) 0 0.18rem,
+      transparent 0.18rem 0.9rem
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      hsl(350 90% 50% / 0.16) 0 0.18rem,
+      transparent 0.18rem 0.9rem
+    );
+  box-shadow:
+    inset 0 0 0 2px hsl(var(--primary) / 0.7),
+    -0.5rem 0 2.2rem -0.9rem hsl(var(--primary) / 0.5),
+    0 1.4rem 2.6rem -1rem hsl(0 0% 0% / 0.9);
+}
+.project-back-suit {
+  font-size: 7rem;
+  line-height: 1;
+  color: hsl(350 92% 54%);
+  text-shadow: 0 0 1.4rem hsl(350 92% 50% / 0.6);
+}
+
+/* --- Payout chip ---------------------------------------------------------- */
+
+/* Reuses the hero chip anatomy (.hero-chip rim, notches, pips and core); only
+   the placement, the toss and the number are specific to the project card.
+   1em is the chip's diameter. It sits well in front of the card in depth, so
+   the tilt parallaxes it against the face. */
+.project-chip {
+  position: absolute;
+  top: -2.6rem;
+  right: -1.4rem;
+  width: 1em;
+  height: 1em;
+  font-size: 6.2rem;
+  transform-style: preserve-3d;
+  transform: translateZ(110px);
+}
+
+.project-chip-drop {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  visibility: hidden;
+}
+.project-table[data-dealt="true"] .project-chip-drop {
+  animation: project-chip-drop 1.05s both;
+  animation-delay: var(--delay, 1.2s);
+}
+
+@keyframes project-chip-drop {
+  0% {
+    visibility: hidden;
+    transform: translate3d(0, -5em, 180px) rotateX(540deg) rotateY(300deg)
+      rotateZ(-40deg);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  }
+  58% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  74% {
+    transform: translate3d(0, -0.22em, 0) rotateX(-14deg) rotateY(7deg)
+      rotateZ(0deg);
+    animation-timing-function: ease-in-out;
+  }
+  88% {
+    transform: translate3d(0, 0, 0) rotateX(5deg) rotateY(-3deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+.project-chip-value {
+  font-size: 0.25em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+.project-chip-caption {
+  position: absolute;
+  right: calc(100% + 0.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 0.4rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(350 85% 42% / 0.45);
+  background: hsl(220 12% 6% / 0.88);
+  color: hsl(40 29% 90%);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  opacity: 0;
+}
+.project-table[data-dealt="true"] .project-chip-caption {
+  animation: project-caption-in 0.5s ease-out both;
+  animation-delay: calc(var(--delay, 1.2s) + 700ms);
+}
+@keyframes project-caption-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* No cursor on touch, so nothing for the card to tilt toward. */
+@media (hover: none) {
+  .project-tilt {
+    transform: none !important;
+  }
+}
+
+/* Reduced motion: the card is simply there, face-up, with its chip. */
+@media (prefers-reduced-motion: reduce) {
+  .project-tilt {
+    transform: none !important;
+    transition: none;
+  }
+  .project-flip,
+  .project-chip-drop {
+    animation: none !important;
+    visibility: visible;
+  }
+  .project-chip-caption {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Social chips — Email, LinkedIn and GitHub as real chips under the buttons.
+
+   Top level (outside @layer) so Tailwind keeps the @keyframes. 1em is the chip's
+   diameter. The anchor owns perspective; the drop (load-in) and the body (lean
+   toward the cursor) are separate layers so neither overwrites the other.
+   --------------------------------------------------------------------------- */
+
+.social-chip {
+  --rx: 8deg;
+  --ry: -14deg;
+  position: relative;
+  display: block;
+  width: 1em;
+  height: 1em;
+  font-size: 4.2rem;
+  border-radius: 50%;
+  perspective: 520px;
+  -webkit-tap-highlight-color: transparent;
+}
+.social-chip:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 0.35rem;
+}
+
+/* Red light under the chip, which comes up on hover. */
+.social-chip-glow {
+  position: absolute;
+  inset: -0.12em;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.55), transparent 68%);
+  filter: blur(0.12em);
+  opacity: 0;
+  transition: opacity 250ms ease;
+  pointer-events: none;
+}
+.social-chip:hover .social-chip-glow,
+.social-chip:focus-visible .social-chip-glow {
+  opacity: 1;
+}
+
+.social-chip-drop,
+.social-chip-body {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+}
+
+.social-chip-drop {
+  animation: social-chip-drop 0.95s both;
+  animation-delay: var(--delay, 1s);
+}
+
+/* Rests tilted a little so the edge shows, leans toward the cursor on hover,
+   lifts toward the viewer, and presses back down when clicked. */
+.social-chip-body {
+  transform: translateZ(0) rotateX(var(--rx)) rotateY(var(--ry));
+  transition: transform 220ms cubic-bezier(0.2, 0.75, 0.3, 1);
+}
+.social-chip:hover .social-chip-body,
+.social-chip:focus-visible .social-chip-body {
+  transform: translateZ(0.3em) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.06);
+}
+.social-chip:active .social-chip-body {
+  transform: translateZ(0.05em) rotateX(var(--rx)) rotateY(var(--ry)) scale(0.95);
+  transition-duration: 90ms;
+}
+
+.social-chip-icon {
+  width: 0.34em;
+  height: 0.34em;
+}
+
+.social-chip-label {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: 50%;
+  transform: translate(-50%, -4px);
+  white-space: nowrap;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: hsl(var(--muted-foreground));
+  opacity: 0;
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+  pointer-events: none;
+}
+.social-chip:hover .social-chip-label,
+.social-chip:focus-visible .social-chip-label {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  color: hsl(var(--foreground));
+}
+
+/* Tossed in after the buttons, tumbling once and landing with a bounce. */
+@keyframes social-chip-drop {
+  0% {
+    visibility: hidden;
+    transform: translate3d(0, -4.5em, 120px) rotateX(540deg) rotateY(300deg)
+      rotateZ(-40deg);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  }
+  58% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  74% {
+    transform: translate3d(0, -0.2em, 0) rotateX(-14deg) rotateY(7deg)
+      rotateZ(0deg);
+    animation-timing-function: ease-in-out;
+  }
+  88% {
+    transform: translate3d(0, 0, 0) rotateX(5deg) rotateY(-3deg) rotateZ(0deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    visibility: visible;
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-chip-drop {
+    animation: none !important;
+    visibility: visible;
+  }
+  .social-chip-body,
+  .social-chip-glow,
+  .social-chip-label {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Navigation pile — five chips, one per section.
+
+   Top level (outside @layer) so Tailwind keeps the @keyframes. Closed, the
+   chips are a pile: each lies flat (tipped back 62deg) and is stacked 0.1em
+   above the one below it, which is exactly how the hero's stacks are built.
+   Open, each chip lifts out, stands face-on, and slides up into a column above
+   the pile. Per-chip delays do the choreography: open top-first, close
+   bottom-first so the pile rebuilds in the right order.
+
+   Two states, on purpose:
+     data-open   the chips are out, or on their way out
+     data-ready  open AND finished moving
+   Nothing takes the pointer, hover or focus until data-ready. A chip in flight
+   under the cursor otherwise grabs a hover lift that fights its own animation
+   (the glitch), and can be clicked before it has arrived (the wrong section).
+
+   --i     position in the column, 0 at the top
+   --last  index of the bottom chip, which ends on the pile's own spot
+   --k     position in the pile, 0 at the bottom (so --k = --last - --i)
+   --r     how far the chip is turned on the pile
+   1em is a chip's diameter.
+   --------------------------------------------------------------------------- */
+
+.nav-pile {
+  position: fixed;
+  left: 0.75rem;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 50;
+  width: 3.2rem;
+  height: 3.2rem;
+  perspective: 420px;
+}
+@media (min-width: 640px) {
+  .nav-pile {
+    left: 1.25rem;
+  }
+}
+
+/* The area that counts as "still on the menu". Just the pile when closed; the
+   whole column and its labels when open, so moving between chips never leaves it. */
+.nav-hit {
+  position: absolute;
+  inset: -0.8rem;
+}
+.nav-pile[data-open="true"] .nav-hit {
+  inset: auto;
+  left: -1rem;
+  top: -18rem;
+  width: 14.5rem;
+  height: 22rem;
+}
+
+/* Sits under the chips: takes the click when the pile is closed, and is the
+   empty spot the chips came from when they are out. */
+.nav-pile-button {
+  position: absolute;
+  inset: -0.2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-pile-button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+.nav-spot {
+  position: absolute;
+  inset: 0.1rem;
+  border-radius: 50%;
+  border: 1.5px dashed hsl(var(--border));
+  opacity: 0;
+  transition: opacity 300ms ease 120ms;
+}
+.nav-pile[data-open="true"] .nav-spot {
+  opacity: 0.7;
+}
+
+.nav-chips {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* Slot: where the chip is in the column. Carries the label too. */
+.nav-slot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1em;
+  height: 1em;
+  font-size: 3.2rem;
+  transform-style: preserve-3d;
+  transform: translateY(0);
+  /* Closing: the bottom of the pile goes back first, and the move ends softly. */
+  transition: transform 480ms cubic-bezier(0.55, 0, 0.1, 1);
+  transition-delay: calc(var(--k) * 40ms);
+}
+.nav-pile[data-open="true"] .nav-slot {
+  /* The column grows upward from the pile; the bottom chip stays on its spot. */
+  transform: translateY(calc((var(--i) - var(--last)) * 4.2rem));
+  /* Opening: the top of the pile comes out first. Ease-out with no overshoot,
+     so a chip never springs past its place and back. */
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+/* Body: the chip's own pose. On the pile it lies flat and is stacked; out, it
+   stands face-on. Same function list both ways, so every part interpolates. */
+.nav-chip-body {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(62deg) rotateZ(var(--r, 0deg))
+    translateZ(calc(var(--k) * 0.1em));
+  transition: transform 480ms cubic-bezier(0.55, 0, 0.1, 1);
+  transition-delay: calc(var(--k) * 40ms);
+  pointer-events: none;
+  cursor: default;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.nav-pile[data-open="true"] .nav-chip-body {
+  transform: rotateX(0deg) rotateZ(0deg) translateZ(0em);
+  transition-duration: 500ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+/* Landed: from here the chips take the pointer. They stop staggering (so
+   pointing at one and leaving it is instant, not queued behind its delay) and
+   use short transitions for hover. */
+.nav-pile[data-ready="true"] .nav-chip-body {
+  pointer-events: auto;
+  cursor: pointer;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.2, 0.75, 0.3, 1);
+  transition-delay: 0s;
+}
+.nav-pile[data-ready="true"] .nav-chip-body:hover,
+.nav-pile[data-ready="true"] .nav-chip-body:focus-visible {
+  transform: rotateX(0deg) rotateZ(0deg) translateZ(0.4em) scale(1.1);
+}
+.nav-pile[data-ready="true"] .nav-chip-body:active {
+  transform: rotateX(0deg) rotateZ(0deg) translateZ(0.1em) scale(0.94);
+  transition-duration: 90ms;
+}
+
+.nav-chip-icon {
+  width: 0.34em;
+  height: 0.34em;
+}
+
+/* Red light under the chip you are on, or pointing at. */
+.nav-chip-glow {
+  position: absolute;
+  inset: -0.18em;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.6), transparent 68%);
+  filter: blur(0.1em);
+  opacity: 0;
+  transition: opacity 250ms ease;
+  pointer-events: none;
+}
+.nav-pile[data-open="true"] .nav-slot:has(.nav-chip-body[data-active="true"]) .nav-chip-glow {
+  opacity: 0.85;
+}
+.nav-pile[data-ready="true"] .nav-slot:hover .nav-chip-glow,
+.nav-pile[data-ready="true"] .nav-slot:has(.nav-chip-body:focus-visible) .nav-chip-glow {
+  opacity: 1;
+}
+
+/* Section name, in a dark pill so it reads over any background in either theme. */
+.nav-chip-label {
+  position: absolute;
+  left: calc(100% + 0.8rem);
+  top: 50%;
+  transform: translate(-8px, -50%);
+  padding: 0.5rem 0.8rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(217 10% 22%);
+  background: hsl(220 12% 6% / 0.9);
+  color: hsl(40 29% 90%);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+  transition-delay: 0s;
+}
+.nav-pile[data-open="true"] .nav-chip-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+  transition-duration: 200ms;
+  /* Arrives as its chip settles. */
+  transition-delay: calc(var(--i) * 60ms + 260ms);
+}
+.nav-slot:has(.nav-chip-body[data-active="true"]) .nav-chip-label {
+  border-color: hsl(var(--primary) / 0.65);
+  color: hsl(350 92% 64%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-slot,
+  .nav-chip-body,
+  .nav-chip-label,
+  .nav-chip-glow,
+  .nav-spot {
+    transition: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero WebGL layer. The canvas covers the scene and the margin around it where
+   cards and chips can sit (the table runs past the portrait's box), so it is
+   sized in percentages of the stage. See hero3d/engine.ts, which reads this
+   box when it builds its camera.
+   --------------------------------------------------------------------------- */
+.hero-stage {
+  position: relative;
+}
+.hero-gl {
+  position: absolute;
+  left: -38%;
+  top: -26%;
+  /* 24% of margin on the right is enough for the furthest chip; more only
+     reaches past the viewport on 1280-1440px screens and adds a scrollbar. */
+  width: 162%;
+  height: 166%;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+.hero-gl[data-ready="true"] {
+  opacity: 1;
+}
+
+/* Real buttons standing in for the canvas objects: out of sight until a
+   keyboard user tabs to them, then a small bar under the table. */
+.hero-gl-controls {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.hero-gl-controls:focus-within {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  left: 0;
+  right: 0;
+  bottom: -4.5rem;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.hero-gl-controls button {
+  padding: 0.4rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(217 10% 22%);
+  background: hsl(220 12% 6% / 0.92);
+  color: hsl(40 29% 90%);
+  font-size: 0.72rem;
+}
+.hero-gl-controls button:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   The project table — a real felt table, seen from above.
+
+   Four seats hold face-down hole cards; the two featured projects are turned
+   face-up in the middle, as hands are at a showdown. That is what resolves
+   the collision with the experience board: the board is community cards, this
+   is a table of players, and the middle here is a reveal rather than a second
+   board.
+
+   Seats sit at 28% and 72% across rather than at the corners. The felt is a
+   stadium, so its ends are half circles — a seat box placed at a corner would
+   hang off the surface, while the straight middle section is full height.
+
+   Green is held as far down as it will go (10% lightness, 26% saturation)
+   so the table reads as felt without turning a near-black page into a green
+   one; the lift comes from a spotlight gradient, not from brightness.
+   --------------------------------------------------------------------------- */
+/* The table is a stadium (a pill: straight sides, half-circle ends). The six
+   seats are placed in a hexagon on it - two on each long rail, one toward each
+   end - but the table itself stays rounded. The lift off the page comes from a
+   drop-shadow filter on the wrapper (.poker-table-shadow). */
+.poker-table-shadow {
+  filter: drop-shadow(0 38px 48px hsl(0 0% 0% / 0.65));
+}
+
+.poker-table {
+  position: relative;
+  border-radius: 9999px;
+  /* Percentage padding resolves against width on every side, so the rail
+     stays an even thickness as the table scales. */
+  padding: 2.4%;
+  background:
+    linear-gradient(
+      180deg,
+      hsl(var(--foreground) / 0.08),
+      hsl(var(--foreground) / 0.01) 38%,
+      transparent 60%
+    ),
+    hsl(220 10% 13%);
+}
+
+.poker-felt {
+  position: relative;
+  height: 100%;
+  border-radius: 9999px;
+  background:
+    radial-gradient(
+      62% 78% at 50% 44%,
+      hsl(158 24% 15%),
+      hsl(158 28% 9%) 72%
+    );
+}
+
+/* Anchored by its centre, so a seat's coordinates describe where the player
+   sits rather than where the corner of a box lands. */
+.table-seat {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+/* Against the rail: far seats hang from the top edge of the felt, near seats
+   stand on the bottom edge, and the padding on the rail side is dropped so the
+   cards themselves touch it. */
+.table-seat[data-side="far"] {
+  /* The cards are centred on the rail: half a card height (7.84em at the
+     hand's 0.72rem, so 2.82rem) plus half the rail's thickness. */
+  top: calc(-2.82rem - 1.8%);
+  padding-top: 0;
+  transform: translate(-50%, 0);
+}
+/* The two seats at the left and right points, which sit on the midline
+   rather than against a long edge. */
+.table-seat[data-side="mid"] {
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.table-seat[data-side="near"] {
+  bottom: calc(-2.82rem - 1.8%);
+  padding-bottom: 0;
+  transform: translate(-50%, 0);
+}
+
+/* A hand of two cards, fanned from a pivot at their bottom edge, so the tops
+   spread apart the way a held hand does. (The first version fanned from the
+   top, so the tops converged: a hand upside down.)
+
+   The cards are the hero's own: the face and back styles are `.hero-card-*`,
+   so the two stay one design. Everything is sized in em from this one
+   font-size; the card is 5.6em by 7.84em, as in the hero. */
+.seat-hand {
+  position: relative;
+  display: block;
+  width: 7.6em;
+  height: 7.84em;
+  font-size: 0.72rem;
+  perspective: 800px;
+}
+.seat-card {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  display: block;
+  width: 5.6em;
+  height: 7.84em;
+  margin-left: -2.8em;
+  transform-origin: 50% 100%;
+  transform: translateX(var(--shift)) rotate(var(--fan));
+  transform-style: preserve-3d;
+  transition: transform 380ms cubic-bezier(0.2, 0.75, 0.3, 1);
+}
+.seat-card:nth-child(1) {
+  --fan: -8deg;
+  --shift: -0.8em;
+}
+.seat-card:nth-child(2) {
+  --fan: 8deg;
+  --shift: 0.8em;
+}
+/* Point at a seat and the hand opens a little wider. */
+.table-seat:hover .seat-card:nth-child(1),
+.table-seat:focus-visible .seat-card:nth-child(1) {
+  --fan: -15deg;
+  --shift: -1.5em;
+}
+.table-seat:hover .seat-card:nth-child(2),
+.table-seat:focus-visible .seat-card:nth-child(2) {
+  --fan: 15deg;
+  --shift: 1.5em;
+}
+
+/* Face down to start (the hero's red-lattice back shows), and pointing at the
+   seat turns the cards over, the second a beat after the first. */
+.seat-card-flip {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+  transition: transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.table-seat:hover .seat-card-flip,
+.table-seat:focus-visible .seat-card-flip {
+  transform: rotateY(0deg);
+}
+
+/* --- Technology pile ------------------------------------------------------- */
+
+/* A project's stack of technologies as a pile of chips, one per technology,
+   built the same way as the navigation pile: closed, each chip lies flat (tipped
+   back 62deg) and sits 0.1em above the one below; opened, each stands up and
+   slides sideways into a row. Opening is driven by the control that contains
+   it (anything with the `group` class), so it opens with its seat. The first
+   chip listed is on top and the first off; closing goes bottom-first so the
+   pile rebuilds in the right order.
+
+   1em is one chip's diameter. --i is a chip's place in the row, --k its place
+   in the pile from the bottom, --n how many chips there are. The container
+   reserves the full width of the open row, so nothing shifts when it opens. */
+.tech-pile {
+  position: relative;
+  display: block;
+  width: calc(var(--n) * 1.12em);
+  height: 1.25em;
+  /* The same proportions as the navigation pile (420px on a 51px chip), so the
+     two read as one object at any size. */
+  perspective: 8.2em;
+  /* Without this the chips are flattened into the container and simply paint in
+     document order: the last one ends up on top whatever its height in the pile,
+     and the stack reads as a loose heap. With it they share one 3D space and sort
+     by depth. */
+  transform-style: preserve-3d;
+}
+/* Soft contact shadow under the pile, which fades as the chips leave it. */
+.tech-pile::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 1.3em;
+  height: 0.52em;
+  margin-left: -0.65em;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    hsl(0 0% 0% / 0.7),
+    hsl(0 0% 0% / 0.25) 55%,
+    transparent 72%
+  );
+  filter: blur(0.07em);
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+.group:hover .tech-pile::before,
+.group:focus-visible .tech-pile::before {
+  opacity: 0;
+}
+.tech-pile-slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
+  transform-style: preserve-3d;
+  transform: translateX(0);
+  transition: transform 420ms cubic-bezier(0.55, 0, 0.1, 1);
+  transition-delay: calc(var(--k) * 35ms);
+}
+.tech-pile-body {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transform: rotateX(62deg) rotateY(0deg) rotateZ(var(--r))
+    translateZ(calc(var(--k) * 0.1em));
+  transition: transform 420ms cubic-bezier(0.55, 0, 0.1, 1);
+  transition-delay: calc(var(--k) * 35ms);
+}
+/* Opened: after the hand has started to turn over, the chips come off one at a
+   time, with no overshoot, and stand up a little tilted so their edges show. */
+.group:hover .tech-pile-slot,
+.group:focus-visible .tech-pile-slot {
+  transform: translateX(calc((var(--i) - (var(--n) - 1) / 2) * 1.12em));
+  transition-duration: 480ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 55ms + 120ms);
+}
+.group:hover .tech-pile-body,
+.group:focus-visible .tech-pile-body {
+  transform: rotateX(14deg) rotateY(-12deg) rotateZ(0deg) translateZ(0em);
+  transition-duration: 480ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 55ms + 120ms);
+}
+
+/* The monogram. Shrinks with its length so three letters still fit the core. */
+.tech-chip-code {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.36em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.tech-chip-code[data-len="1"] {
+  font-size: 0.52em;
+}
+.tech-chip-code[data-len="3"] {
+  font-size: 0.28em;
+}
+.tech-chip-code[data-len="4"] {
+  font-size: 0.24em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seat-card,
+  .seat-card-flip,
+  .tech-pile-slot,
+  .tech-pile-body {
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Award stacks (see AwardStacks.tsx). Stacks of chips packed together on one
+   table, seen from the side and a little above: the tallest at the back, the
+   rest in front. The table is a plane tipped to a low angle (65deg) and turned
+   a little (12deg), so the stacks read as columns of chips, their tops show,
+   and each is seen from a slightly different angle, as a pile on a real table
+   is. Chips are laid out on it exactly as the
+   hero's stacks are (`.hero-stack-rest`, `.hero-stack-shadow`).
+
+   1em is one chip's diameter: the scene sets the font-size. Inside the table,
+   +X is across, +Y is toward the viewer along the table, +Z is up. --x/--y are a
+   stack's place in chip diameters, --i a chip's place in its stack from the
+   bottom, --col the order the stacks drop in.
+   --------------------------------------------------------------------------- */
+.award-scene {
+  --chip: clamp(3.4rem, 9.5vw, 6.4rem);
+  position: relative;
+  height: calc(var(--chip) * 4.6);
+  font-size: var(--chip);
+  perspective: 40em;
+  perspective-origin: 50% 40%;
+}
+.award-table {
+  position: absolute;
+  left: 50%;
+  top: 4.1em;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  transform: rotateX(65deg) rotateZ(-12deg);
+}
+
+/* A soft pool of felt under the pile, so the chips stand on something. */
+.award-felt {
+  position: absolute;
+  left: -3.4em;
+  top: -2.6em;
+  width: 6.8em;
+  height: 5.2em;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    hsl(158 26% 14% / 0.95),
+    hsl(158 28% 9% / 0.6) 55%,
+    transparent 72%
+  );
+  transform: translateZ(-0.02em);
+  pointer-events: none;
+}
+
+.award-stack3d {
+  position: absolute;
+  left: -0.5em;
+  top: -0.5em;
+  width: 1em;
+  height: 1em;
+  transform-style: preserve-3d;
+  transform: translate3d(calc(var(--x) * 1em), calc(var(--y) * 1em), 0);
+}
+
+/* The stack is built the first time it scrolls into view: each chip drops onto
+   the one below, a stack at a time. */
+.award-chip {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+/* Visibility, not opacity, hides a chip before it drops: anything with an
+   opacity other than 1 (or animating it) is flattened out of the 3D space, which
+   collapses every chip of a stack into one disc. */
+.award-scene[data-in="false"] .award-chip {
+  visibility: hidden;
+}
+.award-scene[data-in="true"] .award-chip {
+  animation: award-chip-drop 0.8s both;
+  animation-delay: calc(var(--col) * 0.18s + var(--i) * 0.07s);
+}
+@keyframes award-chip-drop {
+  0% {
+    visibility: hidden;
+    transform: translateZ(5em) rotateX(40deg) rotateY(25deg);
+    animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.6);
+  }
+  64% {
+    visibility: visible;
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+    animation-timing-function: ease-out;
+  }
+  80% {
+    transform: translateZ(0.12em) rotateX(-4deg);
+    animation-timing-function: ease-in-out;
+  }
+  100% {
+    visibility: visible;
+    transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/* The pull. The top chip lifts off its stack, up 2em and a little toward the
+   viewer, and turns to face them: the rotations are the table's own, reversed
+   (12deg about Z, then 65deg about X), so they cancel and the chip's face looks
+   straight out.
+   Pointing at a stack, or at its name, first raises the top chip a little, so
+   it reads as something to take. */
+.award-chip-pull {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  /* Each chip is turned a little on the pile, so the notches on the sides of
+     a stack don't line up like the teeth of a comb. */
+  transform: rotateZ(var(--turn, 0deg));
+  transition: transform 700ms cubic-bezier(0.2, 0.9, 0.25, 1);
+}
+.award-chip-pull[data-top="true"] {
+  cursor: pointer;
+  transform: none;
+}
+.award-stack3d[data-hot="true"] .award-chip-pull[data-top="true"] {
+  transform: translate3d(0, 0, 0.3em);
+}
+.award-stack3d[data-open="true"] .award-chip-pull[data-top="true"] {
+  transform: translate3d(0, 1.3em, 2em) rotateZ(12deg) rotateX(-65deg);
+}
+
+/* Chips as they are in the stacks of a real table: white rectangular notches
+   round the edge, 12 of them, with a band of plain colour above and below so
+   each reads as a block cut in the side, and blue and orange as well as red and
+   black. The face keeps the same 12 so the top chip agrees with its own edge. */
+.award-scene .chip3d,
+.award-scene .hero-chip {
+  --chip-notch: hsl(40 30% 95%);
+}
+.award-scene .chip3d[data-tone="black"],
+.award-scene .hero-chip[data-tone="black"] {
+  --chip: hsl(220 8% 10%);
+  --chip-core: hsl(220 8% 14%);
+  --chip-dash: hsl(40 20% 80% / 0.55);
+}
+.award-scene .chip3d[data-tone="red"],
+.award-scene .hero-chip[data-tone="red"] {
+  --chip: hsl(352 82% 42%);
+  --chip-core: hsl(352 82% 46%);
+  --chip-dash: hsl(40 30% 95% / 0.6);
+}
+.award-scene .chip3d[data-tone="blue"],
+.award-scene .hero-chip[data-tone="blue"] {
+  --chip: hsl(214 82% 40%);
+  --chip-core: hsl(214 82% 48%);
+  --chip-dash: hsl(40 30% 95% / 0.6);
+}
+.award-scene .chip3d[data-tone="gold"],
+.award-scene .hero-chip[data-tone="gold"] {
+  --chip: hsl(33 95% 50%);
+  --chip-core: hsl(41 100% 56%);
+  --chip-dash: hsl(40 30% 95% / 0.65);
+}
+.award-scene .hero-chip {
+  background: repeating-conic-gradient(
+    from -7.5deg,
+    var(--chip-notch) 0deg 15deg,
+    var(--chip) 15deg 30deg
+  );
+  box-shadow:
+    0 0 0 0.02em hsl(0 0% 0% / 0.3),
+    0 0.14em 0.3em hsl(0 0% 0% / 0.5);
+}
+.award-scene .chip3d-slice {
+  background:
+    linear-gradient(hsl(0 0% 0% / 0.22), hsl(0 0% 0% / 0.22)),
+    repeating-conic-gradient(
+      from -7.5deg,
+      var(--chip-notch) 0deg 15deg,
+      var(--chip) 15deg 30deg
+    );
+}
+.award-scene .chip3d-slice[data-edge="true"] {
+  background:
+    linear-gradient(hsl(0 0% 0% / 0.22), hsl(0 0% 0% / 0.22)),
+    var(--chip);
+}
+
+/* The organisation's logo, in the middle of the chip. */
+.award-chip-logo {
+  display: block;
+  width: 78%;
+  height: 78%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: hsl(0 0% 100%);
+}
+.award-chip-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The names under the scene: always visible, and the way in for keyboard and
+   screen-reader users. */
+.award-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.25rem auto 0;
+}
+.award-tab {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: 1px solid hsl(var(--border) / 0.6);
+  background: hsl(var(--card) / 0.5);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+.award-tab:hover,
+.award-tab[aria-expanded="true"] {
+  border-color: hsl(var(--secondary) / 0.7);
+  color: hsl(var(--secondary));
+}
+.award-tab[aria-expanded="true"] {
+  background: hsl(var(--secondary) / 0.1);
+}
+.award-tab:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* The details open with the pull. */
+.award-detail-in {
+  animation: award-detail-in 450ms cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+@keyframes award-detail-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .award-scene .award-chip {
+    animation: none !important;
+    visibility: visible !important;
+  }
+  .award-chip-pull,
+  .award-detail-in {
+    transition: none;
+    animation: none;
+  }
 }
