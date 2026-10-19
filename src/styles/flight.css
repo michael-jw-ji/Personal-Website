@@ -186,7 +186,7 @@ html:has(.flight) {
 .flight .annot-in {
   opacity: 0;
 }
-.flight[data-drawn="true"] .annot-in {
+.flight [data-drawn="true"] .annot-in {
   /* Duration and easing both come from SHUTTLE_MOTION, set inline on the
      root so the curve cannot drift from the solution that produced it. */
   animation: flight-annot-in 380ms var(--flight-ease, ease-out) forwards;
@@ -196,7 +196,7 @@ html:has(.flight) {
 /* Reduced motion gets the finished page, everything already in place. */
 @media (prefers-reduced-motion: reduce) {
   .flight .annot-in,
-  .flight[data-drawn="true"] .annot-in {
+  .flight [data-drawn="true"] .annot-in {
     opacity: 1;
     transform: none;
     animation: none;

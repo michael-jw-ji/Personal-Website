@@ -58,9 +58,8 @@ export const experiences: Experience[] = [
       "HuggingFace",
     ],
     achievements: [
-      "Trained per-layer probes reaching 0.98 macro-F1 with five-seed confidence intervals and random-label controls, showing near-identical probe scores can reflect lexical shortcuts; 2 papers accepted at NeurIPS 2026 workshops.",
-      "Built a Python dataset pipeline labeling 5 variable roles across 7 programming languages using AST and regex extractors, with problem-hash 70/10/20 splits to prevent train/test leakage; published as a public Hugging Face dataset.",
-      "Designed a model-agnostic experiment CLI extracting per-layer hidden states from any Hugging Face LLM, running perturbation and cross-language probe sweeps across 3 models and 5 variable roles with resumable, checkpointed runs.",
+      "Built a Python pipeline labeling 5 variable roles across 7 programming languages with AST and regex extractors, using problem-hash 70/10/20 splits to prevent train/test leakage; released as a public Hugging Face dataset.",
+      "Built a model-agnostic CLI extracting per-layer hidden states from any Hugging Face LLM and trained probes reaching 0.98 macro-F1 across 3 models, using perturbation and random-label controls to show high scores can reflect lexical shortcuts.",
     ],
   },
   {

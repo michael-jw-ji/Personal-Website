@@ -1,0 +1,184 @@
+/* ---------------------------------------------------------------------------
+   The mono skin, the one the site ships. Scoped under `.flight.mono`.
+
+   Same pages, same content, same tokens as flight.css; this file only
+   re-points them. Black, white and neutral grays on a warm paper ground. An
+   expressive serif carries the headlines, the grotesk keeps the prose, and
+   the monospace labels stay as captions and section numbers. Photography is
+   printed in black and white. No accent colour, no gradients, no shadows.
+
+   The serif is loaded in index.html beside the other faces.
+   --------------------------------------------------------------------------- */
+
+.flight.mono {
+  --ink: 40 23% 96%;
+  --ink-raised: 40 16% 92%;
+  --rule: 40 6% 84%;
+  --rule-strong: 40 3% 58%;
+
+  --line: 0 0% 8%;
+  --line-dim: 0 0% 27%;
+  --line-faint: 0 0% 38%;
+
+  /* The accent becomes ink. Everything that was orange is now black, which
+     keeps the hierarchy the colour was carrying without the colour. */
+  --plot: 0 0% 8%;
+  --plot-soft: 0 0% 28%;
+
+  /* Paper grain. A static fractal-noise tile at a few percent, so the ground
+     reads as stock rather than as a flat screen fill. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.flight.mono[data-theme="dark"] {
+  --ink: 0 0% 7%;
+  --ink-raised: 0 0% 10%;
+  --rule: 0 0% 19%;
+  --rule-strong: 0 0% 40%;
+
+  --line: 40 14% 93%;
+  --line-dim: 0 0% 68%;
+  --line-faint: 0 0% 58%;
+
+  --plot: 40 14% 93%;
+  --plot-soft: 0 0% 78%;
+}
+
+/* Matches --ink, for the same reason flight.css hard-codes its own. */
+html:has(.flight.mono) body {
+  background: hsl(40 23% 96%);
+}
+html:has(.flight.mono[data-theme="dark"]) body {
+  background: hsl(0 0% 7%);
+}
+
+/* --- Type ------------------------------------------------------------------ */
+
+/* A high-contrast Bodoni with an optical-size axis, so hairlines thicken at
+   card-title sizes and sharpen at display sizes on their own. It wants air,
+   so the tight negative tracking and semibold the grotesk headlines used are
+   both undone here. */
+.flight.mono h1,
+.flight.mono h2,
+.flight.mono h3 {
+  font-family: "Bodoni Moda", "Didot", "Times New Roman", serif;
+  font-optical-sizing: auto;
+  font-weight: 450;
+  letter-spacing: -0.015em;
+}
+.flight.mono h1 {
+  font-size: clamp(3rem, 7.5vw, 5.75rem);
+  line-height: 0.92;
+}
+.flight.mono h2 {
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  line-height: 1;
+}
+.flight.mono h3 {
+  font-size: 1.3rem;
+  line-height: 1.25;
+  font-weight: 500;
+}
+.flight.mono h1 em,
+.flight.mono h2 em {
+  font-style: italic;
+}
+
+/* The accent tick was a colour device. In black it reads as a bullet, so it
+   goes, and the section number takes over its job of marking the start. */
+.flight.mono .tick::before {
+  display: none;
+}
+
+.flight.mono {
+  counter-reset: section;
+}
+.flight.mono .section-no {
+  counter-increment: section;
+  align-self: flex-start;
+  margin-top: 0.35rem;
+  min-width: 2.25rem;
+}
+.flight.mono .section-no::before {
+  content: counter(section, decimal-leading-zero);
+}
+
+/* --- Furniture --------------------------------------------------------------- */
+
+/* Thin, plain dividers. The measured gradient rule was plot furniture. */
+.flight.mono .rule-h {
+  background: hsl(var(--rule));
+}
+
+/* Smaller, quieter markers: in a single colour the square competes with type
+   at its old size. */
+.flight.mono .datum {
+  width: 5px;
+  height: 5px;
+}
+
+/* Photo slots: the paper itself, a hairline, no hatching. */
+.flight.mono .plate {
+  background-image: none;
+  background-color: hsl(var(--ink-raised));
+}
+
+/* Every image is printed in black and white, logos included. The portrait
+   gets a touch of contrast so it holds up as the one large photograph. */
+.flight.mono img,
+.flight.mono svg {
+  filter: grayscale(1);
+}
+.flight.mono .portrait {
+  filter: grayscale(1) contrast(1.06);
+}
+
+/* --- Spacing ----------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  .flight.mono section.border-t > div:not(.grid) {
+    padding-top: 6.5rem;
+    padding-bottom: 6.5rem;
+  }
+}
+
+/* --- Interaction ------------------------------------------------------------- */
+
+/* Restrained hover: text links gain an underline instead of a colour shift. */
+.flight.mono a.annot,
+.flight.mono nav a {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.35em;
+  transition:
+    color 160ms ease-out,
+    text-decoration-color 160ms ease-out;
+}
+.flight.mono a.annot:hover,
+.flight.mono nav a:hover,
+.flight.mono nav a[aria-current="page"] {
+  text-decoration-color: currentColor;
+}
+
+/* Gentle reveal as each section scrolls in. Scroll-driven, so it costs no
+   script, and skipped entirely where unsupported or motion is reduced. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes mono-rise {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+    .flight.mono section.border-t {
+      animation: mono-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
